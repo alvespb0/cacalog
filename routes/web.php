@@ -27,10 +27,10 @@ Route::controller(clientesController::class)->group(function(){
     Route::get('/cliente/cadastroCliente', 'cadastroCliente')->name('cadastro.cliente'); # retorna view de formulario de cadastro de cliente
     Route::post('/cliente/cadastroCliente', 'createCliente')->name('create.cliente'); # faz o cadastro do cliente no banco
 
-    Route::get('/cliente/alteracaoCliente/{$id}', 'alteracaoCliente')->name('alteracao.cliente'); # retorna view de formulario de alteração do cliente
-    Route::post('/cliente/alteracaoCliente/{$id}', 'updateCliente')->name('update.cliente'); # faz a alteração do cliente no banco
+    Route::get('/cliente/alteracaoCliente/{id}', 'alteracaoCliente')->name('alteracao.cliente'); # retorna view de formulario de alteração do cliente
+    Route::post('/cliente/alteracaoCliente/{id}', 'updateCliente')->name('update.cliente'); # faz a alteração do cliente no banco
     
-    Route::get('/cliente/excluir/{$id}', 'deleteCliente')->name('delete.cliente'); # faz a alteração do cliente no banco
+    Route::get('/cliente/excluir/{id}', 'deleteCliente')->name('delete.cliente'); # faz a alteração do cliente no banco
 
 });
 
