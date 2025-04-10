@@ -8,7 +8,7 @@ use App\Models\Cliente;
 class clientesController extends Controller
 {
     public function cadastroCliente(){
-        return view('cliente_new');
+        return view('cliente/cliente_new');
     }
     /**
      * Recebe uma um POST request faz a validação dos dados, inicialmente url e token podem ser null e salva no banco

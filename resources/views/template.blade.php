@@ -23,6 +23,13 @@
                 background-color: #f0f0f0; /* Cinza claro */
                 font-family: 'Arial', sans-serif;
                 padding-top: 70px; /* Espaço para a navbar fixa */
+                min-height: 100vh; /* Garantir que o corpo ocupe pelo menos 100% da altura da tela */
+                display: flex;
+                flex-direction: column;
+            }
+
+            html {
+                height: 100%;
             }
 
             /* Estilo do link da navbar e a marca */
@@ -38,11 +45,7 @@
                 transform: scale(1.05); /* Zoom suave */
             }
 
-            /* Link ativo (para o item da página em foco) */
-            .nav-item.active .nav-link {
-                color: #ff8a00 !important; /* Laranja suave para o link ativo */
-                font-weight: bold;
-            }
+
 
             /* Hover nos itens da navbar (para um efeito sutil) */
             .nav-item:hover {
@@ -76,6 +79,7 @@
             /* Seção de conteúdo */
             .container {
                 transition: background-color 0.3s ease;
+                flex-grow: 1; /* Faz com que o conteúdo ocupe o espaço restante disponível */
             }
 
             /* Rodapé */
@@ -109,8 +113,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Features</a>
