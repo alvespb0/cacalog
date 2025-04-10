@@ -45,7 +45,7 @@ class clientesController extends Controller
      */
     public function readCliente(){
         $clientes = Cliente::all();
-        return view('cliente_show', ['clientes'=> $clientes]);
+        return view('cliente/cliente_show', ['clientes'=> $clientes]);
     }
 
     /**
