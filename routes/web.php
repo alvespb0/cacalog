@@ -26,8 +26,8 @@ Route::controller(PlanoDeliveryController::class)->group(function() {
     Route::get('/planoDelivery/cadastrar', 'cadastrar')->name('cadastro.planoDelivery');
     Route::post('/planoDelivery/cadastrar', 'create')->name('create.planoDelivery');
 
-    Route::get('/planoDelivery/alterar', 'alteracao')->name('alteracao.planoDelivery');
-    Route::post('/planoDelivery/alterar', 'update')->name('update.planoDelivery');
+    Route::get('/planoDelivery/alterar/{id}', 'alteracao')->name('alteracao.planoDelivery');
+    Route::post('/planoDelivery/alterar/{id}', 'update')->name('update.planoDelivery');
 
     Route::get('/planoDelivery/excluir/{id}', 'exlcuir')->name('excluir.planoDelivery');
 });

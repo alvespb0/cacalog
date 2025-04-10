@@ -17,18 +17,59 @@ class PlanoDeliveryController extends Controller{
     }
 
     function create(Request $request){
-        // cadastrar plano delivery
+        $validateData = $request->validate([
+            'nome' => 'required|string',
+            'descricao' => 'required|string',
+            'valor_mensal' => 'required|double',
+        ]);
+
+        $planoDelivery = new PlanoDelivery();
+
+        $planoDelivery = PlanoDelivery::create([
+            'nome' => $validateData['nome'],
+            'descricao' => $validateData['descricao'],
+            'valor_mensal' => $validateData['valor_mensal']
+        ]);
+
+        session()->flash('mensagem', 'Plano Delivery cadastrado com sucesso!');
+
+        return redirect()->route('show.planoDelivery');
     }
 
-    function alteracao(){
-        return view('planoDelivery.alterar');
+    function alteracao($id){
+        $planoDelivery = PlanoDelivery::findOrFail($id);
+
+        return view('planoDelivery.alterar', ['planoDelivery' => $planoDelivery]);
     }
 
-    function update(Request $request){
-        //alterar plano delivery
+    function update(Request $request, $id){
+        $validateData = $request->validate([
+            'nome' => 'required|string',
+            'descricao' => 'required|string',
+            'valor_mensal' => 'required|double' 
+        ]);
+        
+        $planoDelivery = PlanoDelivery::findOrFail($id);
+
+        $planoDelivery->update([
+            'nome' => $validateData['nome'],
+            'descricao' => $validateData['descricao'],
+            'valor_mensal' => $validateData['valor_mensal']
+        ]);
+
+        session()->flash('mensagem', 'O plano de delivery {$planoDelivery} foi alterado com sucesso');
+        session()->flash('class', 'success');
+        return redirect()->route('show.planoDelivery');
     }
 
     function excluir($id){
-        //deletar plano delivery
+        $planoDelivery = PlanoDelivery::findOrFail($id);
+
+        $planoDelivery->delete();
+
+        session()->flash('mensagem', 'O plano delivery {$planoDelivery->nome} foi excluido com sucesso');
+        session()->flash('classe', 'success');
+
+        return redirect()->route('show.planoDelivery');
     }
 }
