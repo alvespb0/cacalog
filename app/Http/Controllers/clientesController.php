@@ -22,7 +22,7 @@ class clientesController extends Controller
             'email' => "required|string",
             'senha' => "required|string",
             "url_callback" => "nullable|string",
-            "token_autenticação" => "nullable|string"
+            "token_autenticacao" => "nullable|string"
         ]);
 
         Cliente::create([
@@ -31,7 +31,7 @@ class clientesController extends Controller
             'email' => $validatedData['email'],
             'senha' => $validatedData['senha'],
             'url_callback' => $validatedData['url_callback'],
-            'token_autenticação' => $validatedData['token_autenticação']
+            'token_autenticacao' => $validatedData['token_autenticacao']
         ]);
 
         session()->flash('mensagem', 'Cliente registrado com sucesso');
@@ -56,7 +56,7 @@ class clientesController extends Controller
      */
     public function alteracaoCliente($id){
         $cliente = Cliente::findOrFail($id);
-        return view('cliente_edit', ['cliente'=> $cliente]);
+        return view('cliente/cliente_edit', ['cliente'=> $cliente]);
     }
     /**
      * Recebe uma request faz a validação dos dados e faz o update dado o id
@@ -71,7 +71,7 @@ class clientesController extends Controller
             'email' => "required|string",
             'senha' => "required|string",
             "url_callback" => "nullable|string",
-            "token_autenticação" => "nullable|string"
+            "token_autenticacao" => "nullable|string"
         ]);
 
         $cliente = Cliente::findOrFail($id);
@@ -82,7 +82,7 @@ class clientesController extends Controller
             'email' => $validatedData['email'],
             'senha' => $validatedData['senha'],
             'url_callback' => $validatedData['url_callback'],
-            'token_autenticação' => $validatedData['token_autenticação']
+            'token_autenticacao' => $validatedData['token_autenticacao']
         ]);
 
         session()->flash('mensagem', 'Cliente atualizado com sucesso');

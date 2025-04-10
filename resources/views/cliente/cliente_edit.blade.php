@@ -31,36 +31,35 @@
         background-color: #ff8a00;
     }
 </style>
-
-<h1>Cadastrar Cliente</h1>
-<form action="{{route('create.cliente')}}" method="POST">
+<?php var_dump($cliente)?>
+<h1>Editar Cliente</h1>
+<form action="{{ route('update.cliente', ['id' => $cliente['id']]) }}" method="POST">
     @csrf
     <div class="form-group">
         <label for="NameFornecedor">Nome Do Fornecedor</label>
-        <input type="text" class="form-control" name="nome" required>
+        <input type="text" class="form-control" name="nome" required value="{{$cliente['name']}}">
     </div>
     <div class="form-group">
         <label for="NameFornecedor">CNPJ</label>
-        <input type="number" class="form-control" name="cnpj" required>
+        <input type="number" class="form-control" name="cnpj" required value="{{$cliente['cnpj']}}">
     </div>
     <div class="form-group">
         <label for="email">email</label>
-        <input type="email" class="form-control" name="email" required>
+        <input type="email" class="form-control" name="email" required value="{{$cliente['email']}}">
     </div>
     <div class="form-group">
         <label for="senha">senha</label>
-        <input type="password" class="form-control" name="senha" required>
+        <input type="password" class="form-control" name="senha" required value="{{$cliente['senha']}}">
     </div>
     <div class="form-group">
         <label for="url_callback">url_callback</label>
-        <input type="text" class="form-control" name="url_callback">
+        <input type="text" class="form-control" name="url_callback" value="{{$cliente['url_callback']}}">
     </div>
     <div class="form-group">
         <label for="token_autenticação">token_autenticação</label>
-        <input type="text" class="form-control" name="token_autenticacao">
+        <input type="text" class="form-control" name="token_autenticacao" value="{{$cliente['token_autenticacao']}}">
     </div>
     <br>
     <button type="submit" class="btn btn-success">Submit</button>
 </form>
-
 @endsection

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email',255);
             $table->string('senha',255);
             $table->string('url_callback',255)->nullable();
-            $table->string('token_autenticação',255)->nullable();
+            $table->string('token_autenticacao',255)->nullable();
             $table->timestamps();
         });
     }
