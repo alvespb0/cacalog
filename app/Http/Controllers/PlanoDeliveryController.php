@@ -39,14 +39,14 @@ class PlanoDeliveryController extends Controller{
     function alteracao($id){
         $planoDelivery = PlanoDelivery::findOrFail($id);
 
-        return view('planoDelivery.alterar', ['planoDelivery' => $planoDelivery]);
+        return view('planoDelivery/planoDelivery_edit', ['planoDelivery' => $planoDelivery]);
     }
 
     function update(Request $request, $id){
         $validateData = $request->validate([
             'nome' => 'required|string',
             'descricao' => 'required|string',
-            'valor_mensal' => 'required|double' 
+            'valor_mensal' => 'required|numeric' 
         ]);
         
         $planoDelivery = PlanoDelivery::findOrFail($id);
