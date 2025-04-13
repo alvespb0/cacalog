@@ -13,14 +13,14 @@ class PlanoDeliveryController extends Controller{
     }
 
     function cadastrar(){
-        return view('planoDelivery.cadastrar');
+        return view('planoDelivery/planoDelivery_new');
     }
 
     function create(Request $request){
         $validateData = $request->validate([
             'nome' => 'required|string',
             'descricao' => 'required|string',
-            'valor_mensal' => 'required|double',
+            'valor_mensal' => 'required|numeric',
         ]);
 
         $planoDelivery = new PlanoDelivery();
