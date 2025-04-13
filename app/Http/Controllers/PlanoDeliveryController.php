@@ -9,18 +9,18 @@ class PlanoDeliveryController extends Controller{
     function show(){
         $planoDelivery = PlanoDelivery::all();
 
-        return view('planoDelivery.show', ['plano_delivery' => $planoDelivery]);
+        return view('planoDelivery/planoDelivery_show', ['plano_delivery' => $planoDelivery]);
     }
 
     function cadastrar(){
-        return view('planoDelivery.cadastrar');
+        return view('planoDelivery/planoDelivery_new');
     }
 
     function create(Request $request){
         $validateData = $request->validate([
             'nome' => 'required|string',
             'descricao' => 'required|string',
-            'valor_mensal' => 'required|double',
+            'valor_mensal' => 'required|numeric',
         ]);
 
         $planoDelivery = new PlanoDelivery();
@@ -39,14 +39,14 @@ class PlanoDeliveryController extends Controller{
     function alteracao($id){
         $planoDelivery = PlanoDelivery::findOrFail($id);
 
-        return view('planoDelivery.alterar', ['planoDelivery' => $planoDelivery]);
+        return view('planoDelivery/planoDelivery_edit', ['planoDelivery' => $planoDelivery]);
     }
 
     function update(Request $request, $id){
         $validateData = $request->validate([
             'nome' => 'required|string',
             'descricao' => 'required|string',
-            'valor_mensal' => 'required|double' 
+            'valor_mensal' => 'required|numeric' 
         ]);
         
         $planoDelivery = PlanoDelivery::findOrFail($id);
