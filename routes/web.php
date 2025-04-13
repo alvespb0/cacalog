@@ -45,5 +45,5 @@ Route::controller(PlanoDeliveryController::class)->group(function() {
     Route::get('/planoDelivery/alterar/{id}', 'alteracao')->name('alteracao.planoDelivery');
     Route::post('/planoDelivery/alterar/{id}', 'update')->name('update.planoDelivery');
 
-    Route::get('/planoDelivery/excluir/{id}', 'exlcuir')->name('excluir.planoDelivery');
+    Route::get('/planoDelivery/excluir/{id}', 'excluir')->name('excluir.planoDelivery');
 });
