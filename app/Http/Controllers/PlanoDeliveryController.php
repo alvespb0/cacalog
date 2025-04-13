@@ -9,7 +9,7 @@ class PlanoDeliveryController extends Controller{
     function show(){
         $planoDelivery = PlanoDelivery::all();
 
-        return view('planoDelivery.show', ['plano_delivery' => $planoDelivery]);
+        return view('planoDelivery/planoDelivery_show', ['plano_delivery' => $planoDelivery]);
     }
 
     function cadastrar(){
