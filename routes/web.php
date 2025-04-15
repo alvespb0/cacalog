@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PlanoDeliveryController;
 use App\Http\Controllers\clientesController;
+use App\Http\Controllers\MotoboyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,19 @@ Route::controller(clientesController::class)->group(function(){
     Route::get('/cliente/excluir/{id}', 'deleteCliente')->name('delete.cliente'); # faz a alteração do cliente no banco
 
 });
+/** --------------------------------------------- */
+/**              Rotas Classe motoboy             */
+Route::controller(MotoboyController::class)->group(function(){
+    Route::get('/motoboy', 'readMotoboy')->name('readMotoboy');
 
+    Route::get('/motoboy/cadastroMotoboy','cadastroMotoboy')->name('cadastro.cliente');
+    Route::post('/motoboy/cadastroMotoboy', 'createMotoboy')->name('create.motoboy');
+
+    Route::get('/motoboy/alteracaoMotoboy/{id}','alteracaoMotoboy')->name('alteracao.motoboy');
+    Route::post('/motoboy/alteracaoMotoboy/{id}','updateMotoboy')->name('update.motoboy');
+
+    Route::get('/motoboy/excluir/{id}','deleteMotoboy')->name('delete.motoboy');
+});
 /*--------------------------------------------------- */
 /* Endpoints plano delivery */
 Route::controller(PlanoDeliveryController::class)->group(function() {
