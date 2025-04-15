@@ -11,7 +11,7 @@ class MotoboyController extends Controller
      * Retorna a página de cadastro de motoboy
      */
     public function cadastroMotoboy(){
-        return view('motoboy/motoboy-new');
+        return view('motoboy/motoboy_new');
     }
 
     /**
