@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PlanoDeliveryController;
 use App\Http\Controllers\clientesController;
+use App\Http\Controllers\ClientePlanoDeliveryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,4 +47,18 @@ Route::controller(PlanoDeliveryController::class)->group(function() {
     Route::post('/planoDelivery/alterar/{id}', 'update')->name('update.planoDelivery');
 
     Route::get('/planoDelivery/excluir/{id}', 'excluir')->name('excluir.planoDelivery');
+});
+
+/*------------------------------------------------------- */
+/* Endpoints cliente plano delivery */
+Route::controller(ClientePlanoDeliveryController::class)->group(function() {
+    Route::get('/cliente-planoDelivery', 'show')->name('show.cliente-plano-delivery');
+
+    Route::get('/cliente-planoDelivery/cadastrar', 'cadastrar')->name('cadastro.cliente-planoDelivery');
+    Route::post('/cliente-planoDelivery/cadastrar', 'create')->name('create.cliente-planoDelivery');
+
+    Route::get('/cliente-planoDelivery/alterar/{id}', 'alteracao')->name('alteracao.cliente-planoDelivery');
+    Route::post('/cliente-planoDelivery/alterar/{id}', 'update')->name('update.cliente-planoDelivery');
+
+    Route::get('/cliente-planoDelivery/excluir/{id}', 'excluir')->name('excluir.cliente-planoDelivery');
 });

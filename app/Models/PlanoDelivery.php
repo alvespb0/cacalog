@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Cliente;
+
 class PlanoDelivery extends Model
 {
     use HasFactory;
@@ -16,4 +18,8 @@ class PlanoDelivery extends Model
         'descricao',
         'valor_mensal'
     ];
+
+    function clientes(){
+        return $this->hasMany(Cliente::class)->withPivot('data_inicio', 'data_fim');
+    }
 }
