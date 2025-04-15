@@ -45,7 +45,9 @@
     </div>
     <div class="form-group">
         <label for="NameFornecedor">Telefone</label>
-        <input type="number" class="form-control" name="Telefone" required min="0" value = "{{ $motoboy->telefone->telefone }}"> 
+        @foreach($motoboy->telefone as $telefone)
+        <input type="number" class="form-control" name="Telefone[]" required min="0" value="{{ $telefone->telefone }}">
+        @endforeach
     </div>
     <br>
     <button type="submit" class="btn btn-success">Submit</button>
