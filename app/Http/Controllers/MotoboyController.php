@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Motoboy;
+use App\Models\Telefone;
 
 class MotoboyController extends Controller
 {   
@@ -22,12 +23,20 @@ class MotoboyController extends Controller
     public function createMotoboy(Request $request){
         $validatedData = $request->validate([
             'name'=> 'required|string',
-            'cpf'=> 'required|string',
+            'cpf'=> 'required|integer',
+            'telefone' => 'required|integer'
         ]);
 
-        Motoboy::create([
+        $motoboy = Motoboy::create([
             'name'=> $validatedData['name'],
             'cpf'=> $validatedData['cpf'],
+        ]);
+
+        $telefone = Telefone::create([
+            'telefone' => $validatedData['telefone'],
+            'descricao' => 'Telefone do motoboy: '. $motoboy->name,
+            'cliente_id' => null,
+            'motoboy_id' => $motoboy->id
         ]);
 
         session()->flash('mensagem', 'Motoboy registrado com sucesso');

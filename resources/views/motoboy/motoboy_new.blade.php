@@ -41,11 +41,11 @@
     </div>
     <div class="form-group">
         <label for="NameFornecedor">CPF</label>
-        <input type="number" class="form-control" name="CPF" required min="0">
+        <input type="number" class="form-control" name="cpf" required min="0">
     </div>
     <div class="form-group">
         <label for="NameFornecedor">Telefone</label>
-        <input type="number" class="form-control" name="Telefone" required min="0">
+        <input type="number" class="form-control" name="telefone" required min="0">
     </div>
     <br>
     <button type="submit" class="btn btn-success">Submit</button>
