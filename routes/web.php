@@ -53,7 +53,7 @@ Route::controller(MotoboyController::class)->group(function(){
 Route::controller(EstadoController::class)->group(function(){
     Route::get('/estado', 'readEstado')->name('readEstado'); # retorna todos os estados cadastrados e a página de listagem
 
-    Route::get('estado/cadastroEstado', 'cadastroEstado')->name('cadastro.estado'); # retorna o formulario de cadastro de estado
+    Route::get('/estado/cadastroEstado', 'cadastroEstado')->name('cadastro.estado'); # retorna o formulario de cadastro de estado
     Route::post('/estado/cadastroEstado', 'createEstado')->name('create.estado'); # faz o cadastro do estado no banco
 
     Route::get('estado/alteracaoEstado/{id}', 'aleracaoEstado')->name('alteracao.estado'); # retorna view de formulario de alteração de estado
