@@ -52,7 +52,7 @@ Route::controller(PlanoDeliveryController::class)->group(function() {
 /*------------------------------------------------------- */
 /* Endpoints cliente plano delivery */
 Route::controller(ClientePlanoDeliveryController::class)->group(function() {
-    Route::get('/cliente-planoDelivery', 'show')->name('show.cliente-plano-delivery');
+    Route::get('/cliente-planoDelivery', 'show')->name('show.cliente-planoDelivery');
 
     Route::get('/cliente-planoDelivery/cadastrar', 'cadastrar')->name('cadastro.cliente-planoDelivery');
     Route::post('/cliente-planoDelivery/cadastrar', 'create')->name('create.cliente-planoDelivery');

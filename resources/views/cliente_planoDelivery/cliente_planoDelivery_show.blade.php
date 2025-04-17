@@ -79,6 +79,7 @@
             <thead class="table-dark">
                 <tr>
                     <th style ="background: #1c2e4b;">Nome Plano</th>
+                    <th style ="background: #1c2e4b;">Cliente</th>
                     <th style ="background: #1c2e4b;">Data Inicio</th>
                     <th style ="background: #1c2e4b;">Data Fim</th>
                     <th style ="background: #1c2e4b;">Valor Mensal</th>
@@ -86,18 +87,23 @@
                 </tr>
             </thead>
             <tbody>
-            @php
-            var_dump($clientePlanos)
-            @endphp
-            @endphp
             @foreach($clientePlanos as $plano)
-                    <tr>
-                        <td>{{ $plano->nome }}</td>
-                        <td>{{ $plano->data_inicio }}</td>
-                        <td>{{ $plano->data_fim }}</td>
-                        <td>{{ $plano->valor_mensal }}</td>
-                    </tr>
-                @endforeach
+                <tr>
+                    <td>{{ $plano->planoDelivery->nome }}</td>
+                    <td>{{ $plano->cliente->name }}</td>
+                    <td>{{ $plano->data_inicio }}</td>
+                    <td>{{ $plano->data_fim }}</td>
+                    <td>{{ $plano->planoDelivery->valor_mensal }}</td>
+                    <td>
+                            <a href="{{ route('alteracao.cliente-planoDelivery', ['id' => $plano->id]) }}" class="btn btn-outline-primary btn-sm me-2">
+                                <i class="bi bi-pencil-square"></i> Editar
+                            </a>
+                            <a href="{{ route('excluir.cliente-planoDelivery', ['id' => $plano->id])}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir?')">
+                                <i class="bi bi-trash"></i> Excluir
+                            </a>
+                    </td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>

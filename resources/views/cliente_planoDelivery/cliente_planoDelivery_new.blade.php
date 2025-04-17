@@ -37,12 +37,28 @@
     @csrf
     <div class="form-group">
         <label for="planoDelivery">Plano de Delivery</label>
-        <div class="form-floating">
-            <select class="form-select" id="floatingSelect">
+        <div class="form-data">
+            <select class="form-select" id="floatingSelect" name="planoDelivery">
                 @foreach ($planoDelivery as $plano)
                     <option value="{{ $plano->id }}">{{ $plano->nome }}</option>
                 @endforeach
             </select>
+        </div>
+        <label for="cliente">Cliente</label>
+        <div class="form-data">
+            <select class="form-select" id="floatingSelect" name="cliente">
+                @foreach ($clientes as $cliente)
+                    <option value="{{ $cliente->id }}">{{ $cliente->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div>
+            <label for="dataInicio">Data de Inicio do Plano</label>
+            <input class="form-control" type="date" name="dataInicio">
+        </div>
+        <div>
+            <label for="dataFim">Data Final do Plano</label>
+            <input class="form-control" type="date" name="dataFim">
         </div>
     </div>
     <br>
