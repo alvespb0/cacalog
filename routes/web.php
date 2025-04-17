@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PlanoDeliveryController;
 use App\Http\Controllers\clientesController;
 use App\Http\Controllers\ClientePlanoDeliveryController;
+use App\Http\Controllers\MotoboyController;
+use App\Http\Controllers\EstadoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,12 +33,38 @@ Route::controller(clientesController::class)->group(function(){
     Route::get('/cliente/alteracaoCliente/{id}', 'alteracaoCliente')->name('alteracao.cliente'); # retorna view de formulario de alteração do cliente
     Route::post('/cliente/alteracaoCliente/{id}', 'updateCliente')->name('update.cliente'); # faz a alteração do cliente no banco
     
-    Route::get('/cliente/excluir/{id}', 'deleteCliente')->name('delete.cliente'); # faz a alteração do cliente no banco
+    Route::get('/cliente/excluir/{id}', 'deleteCliente')->name('delete.cliente'); # faz a exclusão do cliente no banco
 
 });
+/** --------------------------------------------- */
+/**              Rotas Classe motoboy             */
+Route::controller(MotoboyController::class)->group(function(){
+    Route::get('/motoboy', 'readMotoboy')->name('readMotoboy'); # retorna todos os motoboys cadastrados
 
+    Route::get('/motoboy/cadastroMotoboy','cadastroMotoboy')->name('cadastro.cliente'); # retorna a view de formulario de cadastro do motoboy 
+    Route::post('/motoboy/cadastroMotoboy', 'createMotoboy')->name('create.motoboy'); # faz o cadastro do motoboy no banco
+
+    Route::get('/motoboy/alteracaoMotoboy/{id}','alteracaoMotoboy')->name('alteracao.motoboy'); # retorna view de formulario de alteração do motoboy
+    Route::post('/motoboy/alteracaoMotoboy/{id}','updateMotoboy')->name('update.motoboy'); # faz a alteração do motoboy no banco
+
+    Route::get('/motoboy/excluir/{id}','deleteMotoboy')->name('delete.motoboy'); # faz a exclusão do motoboy no banco
+});
+/** --------------------------------------------- */
+/**              Rotas Classe estado              */
+Route::controller(EstadoController::class)->group(function(){
+    Route::get('/estado', 'readEstado')->name('readEstado'); # retorna todos os estados cadastrados e a página de listagem
+
+    Route::get('/estado/cadastroEstado', 'cadastroEstado')->name('cadastro.estado'); # retorna o formulario de cadastro de estado
+    Route::post('/estado/cadastroEstado', 'createEstado')->name('create.estado'); # faz o cadastro do estado no banco
+
+    Route::get('estado/alteracaoEstado/{id}', 'aleracaoEstado')->name('alteracao.estado'); # retorna view de formulario de alteração de estado
+    Route::post('estado/alteracaoEstado/{id}', 'updateEstado')->name('update.estado'); # faz a alteração do estado no banco
+
+    Route::get('estado/excluir/{id}', 'deleteEstado')->name('delete.estado'); # faz a exclusão do estado no banco
+
+});
 /*--------------------------------------------------- */
-/* Endpoints plano delivery */
+/*               Endpoints plano delivery             */
 Route::controller(PlanoDeliveryController::class)->group(function() {
     Route::get('/planoDelivery', 'show')->name('show.planoDelivery');
 
