@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Cidade;
+use App\Models\Estado;
 
 class CidadeController extends Controller
 {
@@ -15,7 +16,9 @@ class CidadeController extends Controller
     }
 
     public function cadastrar(){
-        return view('cidade/cidade_new');
+        $estados = Estado::all();
+
+        return view('cidade/cidade_new', ['estados' => $estados]);
     }
 
     public function create(Request $request){
@@ -38,8 +41,9 @@ class CidadeController extends Controller
 
     public function alteracao($id){
         $cidade = Cidade::findOrFail($id);
+        $estados = Estados::all();
 
-        return redirect('cidade/cidade_edit', ['cidade' => $cidade]);
+        return redirect('cidade/cidade_edit', ['cidade' => $cidade, 'estados' => $estados]);
     }
 
     public function update(Request $request, $id){
