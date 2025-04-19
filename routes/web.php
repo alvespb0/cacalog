@@ -6,6 +6,7 @@ use App\Http\Controllers\clientesController;
 use App\Http\Controllers\ClientePlanoDeliveryController;
 use App\Http\Controllers\MotoboyController;
 use App\Http\Controllers\EstadoController;
+use App\Http\Controllers\CidadeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,4 +90,18 @@ Route::controller(ClientePlanoDeliveryController::class)->group(function() {
     Route::post('/cliente-planoDelivery/alterar/{id}', 'update')->name('update.cliente-planoDelivery');
 
     Route::get('/cliente-planoDelivery/excluir/{id}', 'excluir')->name('excluir.cliente-planoDelivery');
+});
+
+/*------------------------------------------------------- */
+/* Endpoints cidade */
+Route::controller(CidadeController::class)->group(function(){
+    Route::get('/cidade', 'show')->name('show.cidade');
+
+    Route::get('/cidade/cadastrar', 'cadastrar')->name('cadastro.cidade');
+    Route::get('/cidade/cadastrar', 'create')->name('create.cidade');
+
+    Route::get('/cidade/alterar/{id}', 'alteracao')->name('alteracao.cidade');
+    Route::post('/cidade/alterar/{id}', 'update')->name('update.cidade');
+
+    Route::get('/cidade/excluir/{id}', 'excluir')->name('excluir.cidade');
 });
