@@ -89,7 +89,7 @@
                 <tr>
                     <td>{{ $cidade->nome }}</td>
                     <td>{{ $cidade->cep }}</td>
-                    <td>{{ $cidade->nome }}</td>
+                    <td>{{ $cidade->estado->name }}</td>
                     <td>
                             <a href="{{ route('alteracao.cidade', ['id' => $cidade->id]) }}" class="btn btn-outline-primary btn-sm me-2">
                                 <i class="bi bi-pencil-square"></i> Editar
