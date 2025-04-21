@@ -20,7 +20,7 @@ use App\Http\Controllers\CidadeController;
 */
 
 Route::get('/', function () {
-    return view('template');
+    return view('auth/login');
 });
 
 /** --------------------------------------------- */
