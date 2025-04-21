@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PlanoDeliveryController;
-use App\Http\Controllers\clientesController;
+use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ClientePlanoDeliveryController;
 use App\Http\Controllers\MotoboyController;
 use App\Http\Controllers\EstadoController;
@@ -25,7 +25,7 @@ Route::get('/', function () {
 
 /** --------------------------------------------- */
 /**              Rotas Classe cliente             */
-Route::controller(clientesController::class)->group(function(){
+Route::controller(ClientesController::class)->group(function(){
     Route::get('/cliente','readCliente')->name('readCliente');
 
     Route::get('/cliente/cadastroCliente', 'cadastroCliente')->name('cadastro.cliente'); # retorna view de formulario de cadastro de cliente

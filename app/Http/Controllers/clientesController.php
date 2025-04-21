@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use App\Models\Telefone;
 
-class clientesController extends Controller
+class ClientesController extends Controller
 {
     public function cadastroCliente(){
         return view('cliente/cliente_new');
@@ -22,17 +23,41 @@ class clientesController extends Controller
             'email' => "required|string",
             'senha' => "required|string",
             "url_callback" => "nullable|string",
-            "token_autenticacao" => "nullable|string"
+            "telefone" => "required|array",
+            "telefone.*" => "required|string" 
         ]);
 
-        Cliente::create([
+        $token = bin2hex(random_bytes(32));
+
+        $cliente = Cliente::create([
             'name' => $validatedData['nome'],
             'cnpj' => $validatedData['cnpj'],
             'email' => $validatedData['email'],
             'senha' => $validatedData['senha'],
             'url_callback' => $validatedData['url_callback'],
-            'token_autenticacao' => $validatedData['token_autenticacao']
+            'token_autenticacao' => $token
         ]);
+        
+
+        if (is_array($validatedData['telefone'])){
+            $telefones = $validatedData['telefone'];
+            foreach($telefones as $telefone){
+                Telefone::create([
+                    'telefone' => $telefone,
+                    'descricao' => 'Telefone do cliente: '. $cliente->name,
+                    'cliente_id' => $cliente->id,
+                    'motoboy_id' => null
+                ]);
+            }
+        }else{
+            $telefones = $validatedData['telefone'];
+            Telefone::create([
+                'telefone' => $telefones,
+                'descricao' => 'Telefone do cliente: '. $cliente->name,
+                'cliente_id' => $cliente->id,
+                'motoboy_id' => null
+            ]);
+        }
 
         session()->flash('mensagem', 'Cliente registrado com sucesso');
 
