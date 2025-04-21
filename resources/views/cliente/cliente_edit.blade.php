@@ -46,7 +46,6 @@
     }
 
 </style>
-<?php var_dump($cliente)?>
 <h1>Editar Cliente</h1>
 <form action="{{ route('update.cliente', ['id' => $cliente['id']]) }}" method="POST">
     @csrf
@@ -60,11 +59,11 @@
     </div>
     <div class="form-group">
         <label for="email">email</label>
-        <input type="email" class="form-control" name="email" required value="{{$cliente['email']}}">
+        <input type="email" class="form-control" name="email" required value="{{$cliente->user->email}}">
     </div>
     <div class="form-group">
         <label for="senha">senha</label>
-        <input type="password" class="form-control" name="senha" required value="{{$cliente['senha']}}">
+        <input type="password" class="form-control" name="senha">
     </div>
     <div class="form-group">
         <label for="url_callback">url_callback</label>

@@ -22,11 +22,11 @@
         <h4 class="mb-0">Login</h4>
     </div>
     <div class="card-body">
-        @if (session('erro'))
-            <div class="alert alert-danger">{{ session('erro') }}</div>
+        @if (session('mensagem'))
+            <div class="alert alert-danger">{{ session('mensagem') }}</div>
         @endif
 
-        <form method="POST" action="">
+        <form method="POST" action="{{route('try.login')}}">
             @csrf
 
             <div class="mb-3">

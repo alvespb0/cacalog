@@ -101,7 +101,7 @@ class ClientesController extends Controller
         $validatedData = $request->validate([
             "nome" => "required|string",
             "cnpj" => "required|string",
-            'email' => "required|string",
+            'email' => "required|email|string",
             'senha' => "required|string",
             "url_callback" => "nullable|string",
             "telefone" => "required|array",
@@ -109,11 +109,18 @@ class ClientesController extends Controller
         ]);
 
         $cliente = Cliente::findOrFail($id);
+
+        $user = $cliente->user;
+
+        $user->update([
+            'name' => $validatedData['nome'],
+            'email' => $validatedData['email'],
+            'password' => $validatedData['senha'],
+        ]);
+
         $cliente->update([
             'name' => $validatedData['nome'],
             'cnpj' => $validatedData['cnpj'],
-            'email' => $validatedData['email'],
-            'senha' => $validatedData['senha'],
             'url_callback' => $validatedData['url_callback'],
         ]);
 
