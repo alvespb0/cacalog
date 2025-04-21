@@ -83,6 +83,7 @@ class ClientesController extends Controller
         $cliente = Cliente::findOrFail($id);
         return view('cliente/cliente_edit', ['cliente'=> $cliente]);
     }
+
     /**
      * Recebe uma request faz a validação dos dados e faz o update dado o id
      * @param Request
@@ -96,19 +97,27 @@ class ClientesController extends Controller
             'email' => "required|string",
             'senha' => "required|string",
             "url_callback" => "nullable|string",
-            "token_autenticacao" => "nullable|string"
+            "telefone" => "required|array",
+            "telefone.*" => "required|string|min:1"    
         ]);
 
         $cliente = Cliente::findOrFail($id);
-        
         $cliente->update([
             'name' => $validatedData['nome'],
             'cnpj' => $validatedData['cnpj'],
             'email' => $validatedData['email'],
             'senha' => $validatedData['senha'],
             'url_callback' => $validatedData['url_callback'],
-            'token_autenticacao' => $validatedData['token_autenticacao']
         ]);
+
+        $cliente->telefone()->delete(); # deleta os telefones antigos para incluir novamente.
+
+        foreach ($validatedData['telefone'] as $tel) {
+            $cliente->telefone()->create([
+                'telefone' => $tel,
+                'descricao' => 'Telefone do cliente: '. $cliente->name,
+            ]);
+        }
 
         session()->flash('mensagem', 'Cliente atualizado com sucesso');
 

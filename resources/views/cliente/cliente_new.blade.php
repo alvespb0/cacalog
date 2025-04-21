@@ -69,26 +69,38 @@
         <label for="url_callback">url_callback</label>
         <input type="text" class="form-control" name="url_callback">
     </div>
-    <div id="telefones-container">
-        <div class="form-group">
-            <label>Telefone</label>
-            <input type="text" class="form-control" name="telefone[]">
+    <div class="form-group">
+        <label for="Telefone">Telefone</label>
+        <div id="telefones-container">
+            <input type="number" class="form-control mb-2" name="telefone[]" required min="0">
         </div>
     </div>
-    <button type="button" class="btn-add-phone" onclick="adicionarTelefone()">+ Adicionar Telefone</button>
 
+    <button type="button" class="btn btn-secondary mb-3" onclick="adicionarTelefone()">+ Adicionar Telefone</button>
     <br>
     <button type="submit" class="btn btn-success">Submit</button>
+
 </form>
 
 <script>
     function adicionarTelefone() {
         const container = document.getElementById('telefones-container');
-        const div = document.createElement('div');
-        div.classList.add('form-group');
-        div.innerHTML = `<input type="text" class="form-control" name="telefone[]" placeholder="Outro telefone">`;
-        container.appendChild(div);
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('input-group', 'mb-2');
+
+        wrapper.innerHTML = `
+            <input type="text" class="form-control" name="telefone[]" placeholder="Outro telefone" required>
+            <button type="button" class="btn btn-danger btn-sm" onclick="removerTelefone(this)">x</button>
+        `;
+
+        container.appendChild(wrapper);
     }
+
+    function removerTelefone(botao) {
+        const linha = botao.parentNode;
+        linha.remove();
+    }
+
 </script>
 
 @endsection
