@@ -98,7 +98,7 @@ Route::controller(CidadeController::class)->group(function(){
     Route::get('/cidade', 'show')->name('show.cidade');
 
     Route::get('/cidade/cadastrar', 'cadastrar')->name('cadastro.cidade');
-    Route::get('/cidade/cadastrar', 'create')->name('create.cidade');
+    Route::post('/cidade/cadastrar', 'create')->name('create.cidade');
 
     Route::get('/cidade/alterar/{id}', 'alteracao')->name('alteracao.cidade');
     Route::post('/cidade/alterar/{id}', 'update')->name('update.cidade');
