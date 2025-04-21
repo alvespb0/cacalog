@@ -7,6 +7,7 @@ use App\Http\Controllers\ClientePlanoDeliveryController;
 use App\Http\Controllers\MotoboyController;
 use App\Http\Controllers\EstadoController;
 use App\Http\Controllers\CidadeController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,14 @@ use App\Http\Controllers\CidadeController;
 */
 
 Route::get('/', function () {
-    return view('auth/login');
+    return view('template');
+});
+
+/** --------------------------------------------- */
+/**                Rotas Classe auth              */
+Route::controller(AuthController::class)->group(function(){
+    Route::get('/login', 'login')->name('login');
+    Route::post('/login', 'tryLogin')->name('try.login');
 });
 
 /** --------------------------------------------- */
