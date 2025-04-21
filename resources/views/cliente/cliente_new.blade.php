@@ -30,10 +30,24 @@
     .btn-success:hover {
         background-color: #ff8a00;
     }
+
+    .btn-add-phone {
+        margin-top: 10px;
+        margin-bottom: 20px;
+        background-color: #1c2e4b;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 6px 12px;
+    }
+
+    .btn-add-phone:hover {
+        background-color: #ff8a00;
+    }
 </style>
 
 <h1>Cadastrar Cliente</h1>
-<form action="{{route('create.cliente')}}" method="POST">
+<form action="{{ route('create.cliente') }}" method="POST">
     @csrf
     <div class="form-group">
         <label for="NameFornecedor">Nome Do Fornecedor</label>
@@ -55,12 +69,26 @@
         <label for="url_callback">url_callback</label>
         <input type="text" class="form-control" name="url_callback">
     </div>
-    <div class="form-group">
-        <label for="token_autenticação">token_autenticação</label>
-        <input type="text" class="form-control" name="token_autenticacao">
+    <div id="telefones-container">
+        <div class="form-group">
+            <label>Telefone</label>
+            <input type="text" class="form-control" name="telefone[]">
+        </div>
     </div>
+    <button type="button" class="btn-add-phone" onclick="adicionarTelefone()">+ Adicionar Telefone</button>
+
     <br>
     <button type="submit" class="btn btn-success">Submit</button>
 </form>
+
+<script>
+    function adicionarTelefone() {
+        const container = document.getElementById('telefones-container');
+        const div = document.createElement('div');
+        div.classList.add('form-group');
+        div.innerHTML = `<input type="text" class="form-control" name="telefone[]" placeholder="Outro telefone">`;
+        container.appendChild(div);
+    }
+</script>
 
 @endsection
