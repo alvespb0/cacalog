@@ -29,11 +29,12 @@ Route::get('/', function () {
 Route::controller(AuthController::class)->group(function(){
     Route::get('/login', 'login')->name('login');
     Route::post('/login', 'tryLogin')->name('try.login');
+    Route::get('/logout', 'logout')->name('logout');
 });
 
 /** --------------------------------------------- */
 /**              Rotas Classe cliente             */
-Route::controller(ClientesController::class)->group(function(){
+Route::middleware(['auth', 'tipo:cliente,operador'])->controller(ClientesController::class)->group(function(){
     Route::get('/cliente','readCliente')->name('readCliente');
 
     Route::get('/cliente/cadastroCliente', 'cadastroCliente')->name('cadastro.cliente'); # retorna view de formulario de cadastro de cliente
@@ -47,7 +48,7 @@ Route::controller(ClientesController::class)->group(function(){
 });
 /** --------------------------------------------- */
 /**              Rotas Classe motoboy             */
-Route::controller(MotoboyController::class)->group(function(){
+Route::middleware(['auth', 'tipo:operador'])->controller(MotoboyController::class)->group(function(){
     Route::get('/motoboy', 'readMotoboy')->name('readMotoboy'); # retorna todos os motoboys cadastrados
 
     Route::get('/motoboy/cadastroMotoboy','cadastroMotoboy')->name('cadastro.cliente'); # retorna a view de formulario de cadastro do motoboy 
@@ -58,9 +59,10 @@ Route::controller(MotoboyController::class)->group(function(){
 
     Route::get('/motoboy/excluir/{id}','deleteMotoboy')->name('delete.motoboy'); # faz a exclusão do motoboy no banco
 });
+
 /** --------------------------------------------- */
 /**              Rotas Classe estado              */
-Route::controller(EstadoController::class)->group(function(){
+Route::middleware(['auth', 'tipo:operador'])->controller(EstadoController::class)->group(function(){
     Route::get('/estado', 'readEstado')->name('readEstado'); # retorna todos os estados cadastrados e a página de listagem
 
     Route::get('/estado/cadastroEstado', 'cadastroEstado')->name('cadastro.estado'); # retorna o formulario de cadastro de estado
@@ -74,7 +76,7 @@ Route::controller(EstadoController::class)->group(function(){
 });
 /*--------------------------------------------------- */
 /*               Endpoints plano delivery             */
-Route::controller(PlanoDeliveryController::class)->group(function() {
+Route::middleware(['auth', 'tipo:operador'])->controller(PlanoDeliveryController::class)->group(function() {
     Route::get('/planoDelivery', 'show')->name('show.planoDelivery');
 
     Route::get('/planoDelivery/cadastrar', 'cadastrar')->name('cadastro.planoDelivery');
@@ -88,7 +90,7 @@ Route::controller(PlanoDeliveryController::class)->group(function() {
 
 /*------------------------------------------------------- */
 /* Endpoints cliente plano delivery */
-Route::controller(ClientePlanoDeliveryController::class)->group(function() {
+Route::middleware(['auth', 'tipo:operador'])->controller(ClientePlanoDeliveryController::class)->group(function() {
     Route::get('/cliente-planoDelivery', 'show')->name('show.cliente-planoDelivery');
 
     Route::get('/cliente-planoDelivery/cadastrar', 'cadastrar')->name('cadastro.cliente-planoDelivery');
@@ -102,7 +104,7 @@ Route::controller(ClientePlanoDeliveryController::class)->group(function() {
 
 /*------------------------------------------------------- */
 /* Endpoints cidade */
-Route::controller(CidadeController::class)->group(function(){
+Route::middleware(['auth', 'tipo:operador'])->controller(CidadeController::class)->group(function(){
     Route::get('/cidade', 'show')->name('show.cidade');
 
     Route::get('/cidade/cadastrar', 'cadastrar')->name('cadastro.cidade');

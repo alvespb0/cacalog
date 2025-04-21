@@ -33,4 +33,14 @@ class AuthController extends Controller
         session()->flash('mensagem', 'Credenciais inválidas');
         return redirect(route('login'));
     }
+
+    /**
+     * só faz o logout
+     */
+    function logout(){
+        Auth::logout();
+
+        return redirect(route('login'));
+    }
+
 }
