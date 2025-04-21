@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 use App\Models\Telefone;
+use App\Models\User;
 
 class ClientesController extends Controller
 {
@@ -20,11 +21,18 @@ class ClientesController extends Controller
         $validatedData = $request->validate([
             "nome" => "required|string",
             "cnpj" => "required|string",
-            'email' => "required|string",
+            'email' => "required|email|string",
             'senha' => "required|string",
             "url_callback" => "nullable|string",
             "telefone" => "required|array",
             "telefone.*" => "required|string" 
+        ]);
+
+        $user = User::create([
+            'name' => $validatedData['nome'],
+            'email' => $validatedData['email'],
+            'password' => $validatedData['senha'],
+            'tipo' => 'cliente'
         ]);
 
         $token = bin2hex(random_bytes(32));
@@ -32,9 +40,8 @@ class ClientesController extends Controller
         $cliente = Cliente::create([
             'name' => $validatedData['nome'],
             'cnpj' => $validatedData['cnpj'],
-            'email' => $validatedData['email'],
-            'senha' => $validatedData['senha'],
             'url_callback' => $validatedData['url_callback'],
+            'user_id' => $user->id,
             'token_autenticacao' => $token
         ]);
         
