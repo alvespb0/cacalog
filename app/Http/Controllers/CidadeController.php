@@ -41,9 +41,9 @@ class CidadeController extends Controller
 
     public function alteracao($id){
         $cidade = Cidade::findOrFail($id);
-        $estados = Estados::all();
+        $estados = Estado::all();
 
-        return redirect('cidade/cidade_edit', ['cidade' => $cidade, 'estados' => $estados]);
+        return view ('cidade/cidade_edit', ['cidade' => $cidade, 'estados' => $estados]);
     }
 
     public function update(Request $request, $id){
