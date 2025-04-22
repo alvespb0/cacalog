@@ -8,6 +8,7 @@ use App\Http\Controllers\MotoboyController;
 use App\Http\Controllers\EstadoController;
 use App\Http\Controllers\CidadeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\StatusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -114,4 +115,18 @@ Route::middleware(['auth', 'tipo:operador'])->controller(CidadeController::class
     Route::post('/cidade/alterar/{id}', 'update')->name('update.cidade');
 
     Route::get('/cidade/excluir/{id}', 'excluir')->name('excluir.cidade');
+});
+
+/*------------------------------------------------------- */
+/* Endpoints Status */
+Route::controller(StatusController::class)->group(function(){
+    Route::get('/status', 'readStatus')->name('readStatus');
+
+    Route::get('/status/cadastrar', 'cadastroStatus')->name('cadastro.status');
+    Route::post('/status/cadastrar', 'createStatus')->name('create.status');
+
+    Route::get('/status/alterar/{id}', 'aleracaoStatus')->name('alteracao.status');
+    Route::post('/status/alterar/{id}', 'updateStatus')->name('update.status');
+
+    Route::get('/status/excluir/{id}', 'deleteStatus')->name('delete.status');
 });
