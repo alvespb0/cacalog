@@ -93,7 +93,7 @@
                     <td>{{ $endereco->numero }}</td>
                     <td>{{ $endereco->complemento }}</td>
                     <td>{{ $endereco->bairro }}</td>
-                    <td>{{ $endereco->logradouro }}</td>
+                    <td>{{ $endereco->cidade->nome }}</td>
                     <td>
                             <a href="{{ route('alteracao.endereco', ['id' => $endereco->id]) }}" class="btn btn-outline-primary btn-sm me-2">
                                 <i class="bi bi-pencil-square"></i> Editar
