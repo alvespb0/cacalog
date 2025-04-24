@@ -45,8 +45,9 @@ class EnderecoController extends Controller
 
     function alteracao($id) {
         $endereco = Endereco::findOrFail($id);
+        $cidades = Cidade::all();
 
-        return view('endereco/endereco_edit', ['endereco' => $endereco]);
+        return view('endereco/endereco_edit', ['endereco' => $endereco, 'cidades' => $cidades]);
     }
 
     function update(Request $request, $id){
