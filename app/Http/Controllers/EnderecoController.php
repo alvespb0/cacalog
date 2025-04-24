@@ -12,7 +12,7 @@ class EnderecoController extends Controller
     function show() {
         $enderecos = Endereco::all();
 
-        return view('endereco/endereco_show');
+        return view('endereco/endereco_show', ['enderecos' => $enderecos]);
     }
 
     function cadastrar(){
