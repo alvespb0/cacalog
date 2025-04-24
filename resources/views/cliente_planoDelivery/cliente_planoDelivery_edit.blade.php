@@ -33,7 +33,7 @@
 </style>
 
 <h1>Adquirir um Plano de Delivery</h1>
-<form action="{{route('create.cliente-planoDelivery')}}" method="POST">
+<form action="{{route('update.cliente-planoDelivery', ['id' => $plano['id']] )}}" method="POST">
     @csrf
     <div class="form-group">
         <label for="planoDelivery">Plano de Delivery</label>
