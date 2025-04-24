@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Estado;
+use App\Models\Endereco;
 
 class Cidade extends Model
 {
@@ -19,5 +20,9 @@ class Cidade extends Model
 
     function estado(){
         return $this->belongsTo(Estado::class);
+    }
+
+    function endereco() {
+        return $this->hasMany(Endereco::class);
     }
 }
