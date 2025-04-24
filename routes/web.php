@@ -9,6 +9,7 @@ use App\Http\Controllers\EstadoController;
 use App\Http\Controllers\CidadeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\EnderecoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -129,4 +130,18 @@ Route::controller(StatusController::class)->group(function(){
     Route::post('/status/alterar/{id}', 'updateStatus')->name('update.status');
 
     Route::get('/status/excluir/{id}', 'deleteStatus')->name('delete.status');
+});
+
+/*------------------------------------------------------ */
+/* Endpoints Endereco */
+Route::controller(EnderecoController::class)->group(function() {
+    Route::get('/endereco', 'show')->name('show.endereco');
+
+    Route::get('/endereco/cadastrar', 'cadastrar')->name('cadastro.endereco');
+    Route::post('/endereco/cadastrar', 'create')->name('create.endereco');
+
+    Route::get('/endereco/alterar/{id}', 'alteracao')->name('alteracao.endereco');
+    Route::post('/endereco/alterar/{id}', 'update')->name('update.endereco');
+
+    Route::geT('/endereco/excluir/{id}', 'excluir')->name('excluir.endereco');
 });
