@@ -18,7 +18,7 @@ class EnderecoController extends Controller
     function cadastrar(){
         $cidades = Cidade::all();
 
-        return view('endereco/endereco_new');
+        return view('endereco/endereco_new', ['cidades' => $cidades]);
     }
 
     function create(Request $request) {
