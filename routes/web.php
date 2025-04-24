@@ -10,6 +10,7 @@ use App\Http\Controllers\CidadeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\EnderecoController;
+use App\Http\Controllers\EntregasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -143,5 +144,17 @@ Route::controller(EnderecoController::class)->group(function() {
     Route::get('/endereco/alterar/{id}', 'alteracao')->name('alteracao.endereco');
     Route::post('/endereco/alterar/{id}', 'update')->name('update.endereco');
 
-    Route::geT('/endereco/excluir/{id}', 'excluir')->name('excluir.endereco');
+    Route::get('/endereco/excluir/{id}', 'excluir')->name('excluir.endereco');
+});
+
+Route::controller(EntregasController::class)->group(function() {
+    Route::get('/entrega', 'readEntrega')->name('readEntrega');
+
+    Route::get('/entrega/cadastrar', 'cadastroEntrega')->name('cadastro.entrega');
+    Route::post('/entrega/cadastrar', 'createEntrega')->name('create.entrega');
+
+    Route::get('/entrega/alterar/{id}', 'aleracaoEntrega')->name('alteracao.entrega');
+    Route::post('/entrega/alterar/{id}', 'updateEntrega')->name('update.entrega');
+
+    Route::get('/entrega/excluir/{id}', 'deleteEntrega')->name('excluir.entrega');
 });
