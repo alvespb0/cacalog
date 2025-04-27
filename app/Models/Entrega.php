@@ -17,6 +17,7 @@ class Entrega extends Model
         'conteudo_entrega',
         'codigo_pedido',
         'cliente_id',
+        'endereco_id',
         'motoboy_id',
         'status_id'
     ];

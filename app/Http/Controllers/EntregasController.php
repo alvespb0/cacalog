@@ -12,13 +12,24 @@ use App\Models\Cliente;
 class EntregasController extends Controller
 {
     /**
+     * Recebe um cliente e retorna os endereços correspondentes à aquele cliente numa session flash
+     */
+    public function vinculaClienteEntrega(){
+        $clientes = Cliente::all();
+        return view('entrega/vincula_cliente', ['clientes' => $clientes]);
+    }
+    /**
      * retorna a página de cadastro de Entrega
      */
-    public function cadastroEntrega(){
+    public function cadastroEntrega(Request $request){
+        $cliente = Cliente::where('id', $request->cliente)->first();
+
+        $enderecos =  $cliente->endereco;
+
         $motoboys = Motoboy::all();
         $status = Status::all();
-        $clientes = Cliente::all();
-        return view('entrega/entrega_new', ['motoboys' => $motoboys, 'status' => $status, 'clientes' => $clientes]);
+        
+        return view('entrega/entrega_new', ['motoboys' => $motoboys, 'status' => $status, 'cliente' => $cliente, 'enderecos' => $enderecos]);
     }
 
     /**
@@ -30,15 +41,15 @@ class EntregasController extends Controller
         $validatedData = $request->validate([
             'conteudo_entrega' => 'required|string',
             'codigo_pedido' => 'required|integer',
-            'cliente_id' => 'required|integer',
+            'endereco_id' => 'required|integer',
             'motoboy_id' => 'required|integer',
             'status_id' => 'required|integer'
         ]);
 
-        Status::create([
+        Entrega::create([
             'conteudo_entrega' => $validatedData['conteudo_entrega'],
             'codigo_pedido' => $validatedData['codigo_pedido'],
-            'cliente_id' => $validatedData['cliente_id'],
+            'endereco_id' => $validatedData['endereco_id'],
             'motoboy_id' => $validatedData['motoboy_id'],
             'status_id' => $validatedData['status_id']
         ]);

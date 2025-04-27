@@ -147,11 +147,15 @@ Route::controller(EnderecoController::class)->group(function() {
     Route::get('/endereco/excluir/{id}', 'excluir')->name('excluir.endereco');
 });
 
+/** --------------------------------------------- */
+/**              Rotas Classe Entregas            */
 Route::controller(EntregasController::class)->group(function() {
     Route::get('/entrega', 'readEntrega')->name('readEntrega');
 
-    Route::get('/entrega/cadastrar', 'cadastroEntrega')->name('cadastro.entrega');
-    Route::post('/entrega/cadastrar', 'createEntrega')->name('create.entrega');
+    Route::get('/entrega/cadastrar', 'vinculaClienteEntrega')->name('cliente.entrega');
+    
+    Route::post('/entrega/cadastrar', 'cadastroEntrega')->name('cadastro.entrega');
+    Route::post('/entrega/cadastrar/create', 'createEntrega')->name('create.entrega');
 
     Route::get('/entrega/alterar/{id}', 'aleracaoEntrega')->name('alteracao.entrega');
     Route::post('/entrega/alterar/{id}', 'updateEntrega')->name('update.entrega');
