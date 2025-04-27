@@ -15,13 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('conteudo_entrega', 255);
             $table->integer('codigo_pedido');
-            $table->unsignedBigInteger('cliente_id')->nullable();
             $table->unsignedBigInteger('endereco_id')->nullable();
             $table->unsignedBigInteger('motoboy_id')->nullable();
             $table->unsignedBigInteger('status_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('set null');
             $table->foreign('endereco_id')->references('id')->on('enderecos')->onDelete('set null');
             $table->foreign('motoboy_id')->references('id')->on('status')->onDelete('set null');
             $table->foreign('status_id')->references('id')->on('clientes')->onDelete('set null');
