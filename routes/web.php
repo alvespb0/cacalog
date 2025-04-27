@@ -93,7 +93,7 @@ Route::middleware(['auth', 'tipo:operador'])->controller(PlanoDeliveryController
 
 /*------------------------------------------------------- */
 /* Endpoints cliente plano delivery */
-Route::middleware(['auth', 'tipo:operador'])->controller(ClientePlanoDeliveryController::class)->group(function() {
+Route::middleware(['auth', 'tipo:cliente,operador'])->controller(ClientePlanoDeliveryController::class)->group(function() {
     Route::get('/cliente-planoDelivery', 'show')->name('show.cliente-planoDelivery');
 
     Route::get('/cliente-planoDelivery/cadastrar', 'cadastrar')->name('cadastro.cliente-planoDelivery');
@@ -121,7 +121,7 @@ Route::middleware(['auth', 'tipo:operador'])->controller(CidadeController::class
 
 /*------------------------------------------------------- */
 /* Endpoints Status */
-Route::controller(StatusController::class)->group(function(){
+Route::middleware(['auth', 'tipo:operador'])->controller(StatusController::class)->group(function(){
     Route::get('/status', 'readStatus')->name('readStatus');
 
     Route::get('/status/cadastrar', 'cadastroStatus')->name('cadastro.status');
@@ -135,7 +135,7 @@ Route::controller(StatusController::class)->group(function(){
 
 /*------------------------------------------------------ */
 /* Endpoints Endereco */
-Route::controller(EnderecoController::class)->group(function() {
+Route::middleware(['auth', 'tipo:operador'])->controller(EnderecoController::class)->group(function() {
     Route::get('/endereco', 'show')->name('show.endereco');
 
     Route::get('/endereco/cadastrar', 'cadastrar')->name('cadastro.endereco');
@@ -149,7 +149,7 @@ Route::controller(EnderecoController::class)->group(function() {
 
 /** --------------------------------------------- */
 /**              Rotas Classe Entregas            */
-Route::controller(EntregasController::class)->group(function() {
+Route::middleware(['auth', 'tipo:cliente,operador'])->controller(EntregasController::class)->group(function() {
     Route::get('/entrega', 'readEntrega')->name('readEntrega');
 
     Route::get('/entrega/cadastrar', 'vinculaClienteEntrega')->name('cliente.entrega');
