@@ -21,8 +21,8 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('endereco_id')->references('id')->on('enderecos')->onDelete('set null');
-            $table->foreign('motoboy_id')->references('id')->on('status')->onDelete('set null');
-            $table->foreign('status_id')->references('id')->on('clientes')->onDelete('set null');
+            $table->foreign('motoboy_id')->references('id')->on('motoboys')->onDelete('set null');
+            $table->foreign('status_id')->references('id')->on('status')->onDelete('set null');
         });
     }
 

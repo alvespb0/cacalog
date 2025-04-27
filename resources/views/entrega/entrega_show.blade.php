@@ -73,7 +73,7 @@
 </style>
 
     <div class="card shadow p-4 mb-4 bg-white rounded">
-        <h1 class="mb-4 text-center" style="color: #1c2e4b;">Lista de Estados</h1>
+        <h1 class="mb-4 text-center" style="color: #1c2e4b;">Lista de Entregas</h1>
 
         <table class="table table-hover table-bordered text-center align-middle" style="border-radius: 10px; overflow: hidden;">
             <thead class="table-dark">
