@@ -160,5 +160,5 @@ Route::controller(EntregasController::class)->group(function() {
     Route::get('/entrega/alterar/{id}', 'aleracaoEntrega')->name('alteracao.entrega');
     Route::post('/entrega/alterar/{id}', 'updateEntrega')->name('update.entrega');
 
-    Route::get('/entrega/excluir/{id}', 'deleteEntrega')->name('excluir.entrega');
+    Route::get('/entrega/excluir/{id}', 'deleteEntrega')->name('delete.entrega');
 });
