@@ -60,6 +60,15 @@
                 @endforeach
             </select>
         </div>
+        <label for="cliente">Cliente</label>
+        <div class="form-data">
+            <select class="form-select" id="floatingSelect" name="cliente_id">
+                <option selected>Selecione um cliente</option>
+                @foreach ($clientes as $cliente)
+                    <option value="{{ $cliente->id }}" {{ $endereco->cliente_id == $cliente->id ? 'selected': ''}}>{{ $cliente->name }}</option>
+                @endforeach
+            </select>
+        </div>
     </div>
     <br>
     <button type="submit" class="btn btn-success">Alterar</button>

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Telefone;
 use App\Models\User;
+use App\Models\Endereco;
 
 class Cliente extends Model
 {
@@ -20,6 +21,10 @@ class Cliente extends Model
 
     public function telefone(){
         return $this->hasMany(Telefone::class);
+    }
+
+    public function endereco(){
+        return $this->hasMany(Endereco::class);
     }
 
     public function user(){

@@ -83,6 +83,7 @@
                     <th style ="background: #1c2e4b;">Complemento</th>
                     <th style ="background: #1c2e4b;">Bairro</th>
                     <th style ="background: #1c2e4b;">Cidade</th>
+                    <th style ="background: #1c2e4b;">Cliente</th>
                     <th style ="background: #1c2e4b;">Ações</th>
                 </tr>
             </thead>
@@ -94,6 +95,7 @@
                     <td>{{ $endereco->complemento }}</td>
                     <td>{{ $endereco->bairro }}</td>
                     <td>{{ $endereco->cidade->nome }}</td>
+                    <td>{{ $endereco->cliente->name }}</td>
                     <td>
                             <a href="{{ route('alteracao.endereco', ['id' => $endereco->id]) }}" class="btn btn-outline-primary btn-sm me-2">
                                 <i class="bi bi-pencil-square"></i> Editar

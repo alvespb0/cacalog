@@ -55,8 +55,18 @@
         <label for="cliente">Cidade</label>
         <div class="form-data">
             <select class="form-select" id="floatingSelect" name="cidade_id">
+                <option selected>Selecione uma cidade</option>
                 @foreach ($cidades as $cidade)
                     <option value="{{ $cidade->id }}">{{ $cidade->nome }}</option>
+                @endforeach
+            </select>
+        </div>
+        <label for="cliente">Cliente</label>
+        <div class="form-data">
+            <select class="form-select" id="floatingSelect" name="cliente_id">
+                <option selected>Selecione um cliente</option>
+                @foreach ($clientes as $cliente)
+                    <option value="{{ $cliente->id }}">{{ $cliente->name }}</option>
                 @endforeach
             </select>
         </div>
