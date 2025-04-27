@@ -161,4 +161,8 @@ Route::controller(EntregasController::class)->group(function() {
     Route::post('/entrega/alterar/{id}', 'updateEntrega')->name('update.entrega');
 
     Route::get('/entrega/excluir/{id}', 'deleteEntrega')->name('delete.entrega');
+
+    Route::get('/dashboard', 'showIndex')->name('show.index');
+    Route::post('/dashboard', 'alterEntregaByIndex')->name('entrega.index');
+
 });

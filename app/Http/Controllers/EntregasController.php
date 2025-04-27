@@ -132,4 +132,25 @@ class EntregasController extends Controller
         return redirect()->route('readEntrega');
     }
 
+    public function showIndex(){
+        $entregas = Entrega::all();
+        $status = Status::all();
+        return view('index', ['entregas'=>$entregas, 'status'=>$status]);
+    }
+    public function alterEntregaByIndex(Request $request)
+    {
+        $request->validate([
+            'entrega_id' => 'required|integer',  
+            'status' => 'required|integer'         
+        ]);
+    
+        $entrega = Entrega::findOrFail($request->entrega_id);
+    
+        $entrega->update([
+            'status_id' => $request->status
+        ]);
+    
+        return response()->json(['mensagem' => 'Status atualizado com sucesso!']);
+    }
+    
 }
