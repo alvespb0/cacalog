@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Status;
 use App\Models\Motoboy;
-use App\Models\Cliente;
+use App\Models\Endereco;
 
 class Entrega extends Model
 {
@@ -16,7 +16,6 @@ class Entrega extends Model
     protected $fillable = [
         'conteudo_entrega',
         'codigo_pedido',
-        'cliente_id',
         'endereco_id',
         'motoboy_id',
         'status_id'
@@ -28,7 +27,7 @@ class Entrega extends Model
     public function motoboy(){
         return $this->belongsTo(Motoboy::class);
     }
-    public function cliente(){
-        return $this->belongsTo(Cliente::class);
+    public function endereco(){
+        return $this->belongsTo(Endereco::class);
     }
 }
