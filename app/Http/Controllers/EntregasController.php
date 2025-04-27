@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Entrega;
+use App\Models\Endereco;
 use App\Models\Status;
 use App\Models\Motoboy;
 use App\Models\Cliente;
@@ -76,10 +77,17 @@ class EntregasController extends Controller
      */
     public function aleracaoEntrega($id){
         $entrega = Entrega::findOrFail($id);
+
+        $endereco = Endereco::findOrFail($entrega->endereco_id);
+
+        $cliente = $endereco->cliente;
+
+        $enderecosCliente = $cliente->endereco;
+
         $motoboys = Motoboy::all();
         $status = Status::all();
-        $clientes = Cliente::all();
-        return view('entrega/entrega_edit',['entrega' => $entrega, 'motoboys' => $motoboys, 'status' => $status, 'clientes' => $clientes]);
+
+        return view('entrega/entrega_edit',['entrega' => $entrega, 'motoboys' => $motoboys, 'status' => $status, 'cliente' => $cliente, 'enderecos' => $enderecosCliente]);
     }
 
     /**
@@ -92,7 +100,7 @@ class EntregasController extends Controller
         $validatedData = $request->validate([
             'conteudo_entrega' => 'required|string',
             'codigo_pedido' => 'required|integer',
-            'cliente_id' => 'required|integer',
+            'endereco_id' => 'required|integer',
             'motoboy_id' => 'required|integer',
             'status_id' => 'required|integer'
         ]);
@@ -102,7 +110,7 @@ class EntregasController extends Controller
         $entrega->update([
             'conteudo_entrega' => $validatedData['conteudo_entrega'],
             'codigo_pedido' => $validatedData['codigo_pedido'],
-            'cliente_id' => $validatedData['cliente_id'],
+            'endereco_id' => $validatedData['endereco_id'],
             'motoboy_id' => $validatedData['motoboy_id'],
             'status_id' => $validatedData['status_id']
         ]);
