@@ -107,7 +107,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="#">&nbsp;&nbsp;Caça Log</a>
+            <a class="navbar-brand" href="/">&nbsp;&nbsp;Caça Log</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -133,6 +133,34 @@
                             <li><a class="dropdown-item" href="/estado/cadastroEstado">Cadastro Estado</a></li>
                             <li><a class="dropdown-item" href="/estado">Lista de Estados</a></li>
                         </ul>
+                        <ul class="dropdown-menu" aria-labelledby="featuresDropdown">
+                            <li><a class="dropdown-item" href="/cidade/cadastrar">Cadastro Cidade</a></li>
+                            <li><a class="dropdown-item" href="/cidade">Lista de cidades</a></li>
+                        </ul>
+
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="featuresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Cidade
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="featuresDropdown">
+                            <li><a class="dropdown-item" href="/cidade/cadastrar">Cadastro Cidade</a></li>
+                            <li><a class="dropdown-item" href="/cidade">Lista de cidades</a></li>
+                        </ul>
+
+                    </li>
+
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="featuresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Endereço
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="featuresDropdown">
+                            <li><a class="dropdown-item" href="/endereco/cadastrar">Cadastro Endereço</a></li>
+                            <li><a class="dropdown-item" href="/endereco">Lista de Endereço</a></li>
+                        </ul>
+
                     </li>
 
                     <!-- Dropdown Pricing -->
@@ -153,6 +181,26 @@
                         <ul class="dropdown-menu" aria-labelledby="pricingDropdown">
                             <li><a class="dropdown-item" href="/planoDelivery/cadastrar">Cadastro Plano Delivery</a></li>
                             <li><a class="dropdown-item" href="/planoDelivery">Lista de Planos</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="pricingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Obter Plano Delivery
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="pricingDropdown">
+                            <li><a class="dropdown-item" href="/cliente-planoDelivery/cadastrar">Obter</a></li>
+                            <li><a class="dropdown-item" href="/cliente-planoDelivery">Planos</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="pricingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Entregas
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="pricingDropdown">
+                            <li><a class="dropdown-item" href="/entrega/cadastrar">Cadastrar Entrega</a></li>
+                            <li><a class="dropdown-item" href="/entrega">Minhas Entregas</a></li>
                         </ul>
                     </li>
                 </ul>
