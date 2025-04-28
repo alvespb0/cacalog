@@ -30,8 +30,22 @@
     .btn-success:hover {
         background-color: #ff8a00;
     }
+
+    .btn-add-phone {
+        margin-top: 10px;
+        margin-bottom: 20px;
+        background-color: #1c2e4b;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 6px 12px;
+    }
+
+    .btn-add-phone:hover {
+        background-color: #ff8a00;
+    }
+
 </style>
-<?php var_dump($cliente)?>
 <h1>Editar Cliente</h1>
 <form action="{{ route('update.cliente', ['id' => $cliente['id']]) }}" method="POST">
     @csrf
@@ -45,21 +59,54 @@
     </div>
     <div class="form-group">
         <label for="email">email</label>
-        <input type="email" class="form-control" name="email" required value="{{$cliente['email']}}">
+        <input type="email" class="form-control" name="email" required value="{{$cliente->user->email}}">
     </div>
     <div class="form-group">
         <label for="senha">senha</label>
-        <input type="password" class="form-control" name="senha" required value="{{$cliente['senha']}}">
+        <input type="password" class="form-control" name="senha">
     </div>
     <div class="form-group">
         <label for="url_callback">url_callback</label>
         <input type="text" class="form-control" name="url_callback" value="{{$cliente['url_callback']}}">
     </div>
     <div class="form-group">
-        <label for="token_autenticação">token_autenticação</label>
-        <input type="text" class="form-control" name="token_autenticacao" value="{{$cliente['token_autenticacao']}}">
+    <label for="Telefone">Telefone</label>
+    <div id="telefones-container">
+            @foreach($cliente->telefone as $index => $telefone)
+            <div class="input-group mb-2">
+                <input type="number" class="form-control" name="telefone[]" required min="0" value="{{ $telefone->telefone }}">
+                @if($index > 0)
+                <button type="button" class="btn btn-danger btn-sm" onclick="removerTelefone(this)">x</button>
+                @endif
+            </div>
+            @endforeach
+        </div>
     </div>
+
+    <button type="button" class="btn btn-secondary mb-3" onclick="adicionarTelefone()">+ Adicionar Telefone</button>
     <br>
     <button type="submit" class="btn btn-success">Submit</button>
+
 </form>
+
+<script>
+    function adicionarTelefone() {
+        const container = document.getElementById('telefones-container');
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('input-group', 'mb-2');
+
+        wrapper.innerHTML = `
+            <input type="number" class="form-control" name="telefone[]" required placeholder="Outro telefone">
+            <button type="button" class="btn btn-danger btn-sm" onclick="removerTelefone(this)">x</button>
+        `;
+
+        container.appendChild(wrapper);
+    }
+
+    function removerTelefone(botao) {
+        const linha = botao.parentNode;
+        linha.remove();
+    }
+</script>
+
 @endsection

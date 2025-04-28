@@ -107,25 +107,131 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="#">&nbsp&nbsp Caça Log</a>
+            <a class="navbar-brand" href="/dashboard">&nbsp;&nbsp;Caça Log</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
+                @if(Auth::check() && Auth::user()->tipo === 'operador')
+
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                    <!-- Dropdown HOME -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="homeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Cliente
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="homeDropdown">
+                            <li><a class="dropdown-item" href="/cliente/cadastroCliente">Cadastro de Cliente</a></li>
+                            <li><a class="dropdown-item" href="/cliente">Lista de Clientes</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
+
+                    <!-- Dropdown Features -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="featuresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Estado
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="featuresDropdown">
+                            <li><a class="dropdown-item" href="/estado/cadastroEstado">Cadastro Estado</a></li>
+                            <li><a class="dropdown-item" href="/estado">Lista de Estados</a></li>
+                        </ul>
+                        <ul class="dropdown-menu" aria-labelledby="featuresDropdown">
+                            <li><a class="dropdown-item" href="/cidade/cadastrar">Cadastro Cidade</a></li>
+                            <li><a class="dropdown-item" href="/cidade">Lista de cidades</a></li>
+                        </ul>
+
                     </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="featuresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Cidade
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="featuresDropdown">
+                            <li><a class="dropdown-item" href="/cidade/cadastrar">Cadastro Cidade</a></li>
+                            <li><a class="dropdown-item" href="/cidade">Lista de cidades</a></li>
+                        </ul>
+
+                    </li>
+
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="featuresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Endereço
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="featuresDropdown">
+                            <li><a class="dropdown-item" href="/endereco/cadastrar">Cadastro Endereço</a></li>
+                            <li><a class="dropdown-item" href="/endereco">Lista de Endereço</a></li>
+                        </ul>
+
+                    </li>
+
+                    <!-- Dropdown Pricing -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="pricingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Motoboy
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="pricingDropdown">
+                            <li><a class="dropdown-item" href="/motoboy/cadastroMotoboy">Cadastro Motoboy</a></li>
+                            <li><a class="dropdown-item" href="/motoboy">Lista de Motoboys</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="pricingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Plano Delivery
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="pricingDropdown">
+                            <li><a class="dropdown-item" href="/planoDelivery/cadastrar">Cadastro Plano Delivery</a></li>
+                            <li><a class="dropdown-item" href="/planoDelivery">Lista de Planos</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="pricingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Obter Plano Delivery
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="pricingDropdown">
+                            <li><a class="dropdown-item" href="/cliente-planoDelivery/cadastrar">Obter</a></li>
+                            <li><a class="dropdown-item" href="/cliente-planoDelivery">Planos</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="pricingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Entregas
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="pricingDropdown">
+                            <li><a class="dropdown-item" href="/entrega/cadastrar">Cadastrar Entrega</a></li>
+                            <li><a class="dropdown-item" href="/entrega">Minhas Entregas</a></li>
+                        </ul>
+                    </li>
+                    @endif
+                </ul>
+                @if(Auth::check() && Auth::user()->tipo === 'cliente')
+                <ul class="navbar-nav">
+                    <li class="navbar-item"><a class ="nav-link" href="/dashboard">Entregas</a></li>
+                </ul>
+                @endif
+
+                @if(Auth::check())
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link" href="/logout">Sair</a>
                     </li>
                 </ul>
+                @endif
+
+                @if(!Auth::check())
+
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                    </li>
+                </ul>
+
+                @endif
             </div>
         </nav>
-
         <div class="container">
             <div class="row">
                 <div class="col-sm-2"></div>

@@ -2,7 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PlanoDeliveryController;
-use App\Http\Controllers\clientesController;
+use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\ClientePlanoDeliveryController;
+use App\Http\Controllers\MotoboyController;
+use App\Http\Controllers\EstadoController;
+use App\Http\Controllers\CidadeController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\StatusController;
+use App\Http\Controllers\EnderecoController;
+use App\Http\Controllers\EntregasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +28,16 @@ Route::get('/', function () {
 });
 
 /** --------------------------------------------- */
+/**                Rotas Classe auth              */
+Route::controller(AuthController::class)->group(function(){
+    Route::get('/login', 'login')->name('login');
+    Route::post('/login', 'tryLogin')->name('try.login');
+    Route::get('/logout', 'logout')->name('logout');
+});
+
+/** --------------------------------------------- */
 /**              Rotas Classe cliente             */
-Route::controller(clientesController::class)->group(function(){
+Route::middleware(['auth', 'tipo:cliente,operador'])->controller(ClientesController::class)->group(function(){
     Route::get('/cliente','readCliente')->name('readCliente');
 
     Route::get('/cliente/cadastroCliente', 'cadastroCliente')->name('cadastro.cliente'); # retorna view de formulario de cadastro de cliente
@@ -30,13 +46,40 @@ Route::controller(clientesController::class)->group(function(){
     Route::get('/cliente/alteracaoCliente/{id}', 'alteracaoCliente')->name('alteracao.cliente'); # retorna view de formulario de alteração do cliente
     Route::post('/cliente/alteracaoCliente/{id}', 'updateCliente')->name('update.cliente'); # faz a alteração do cliente no banco
     
-    Route::get('/cliente/excluir/{id}', 'deleteCliente')->name('delete.cliente'); # faz a alteração do cliente no banco
+    Route::get('/cliente/excluir/{id}', 'deleteCliente')->name('delete.cliente'); # faz a exclusão do cliente no banco
 
 });
+/** --------------------------------------------- */
+/**              Rotas Classe motoboy             */
+Route::middleware(['auth', 'tipo:operador'])->controller(MotoboyController::class)->group(function(){
+    Route::get('/motoboy', 'readMotoboy')->name('readMotoboy'); # retorna todos os motoboys cadastrados
 
+    Route::get('/motoboy/cadastroMotoboy','cadastroMotoboy')->name('cadastro.cliente'); # retorna a view de formulario de cadastro do motoboy 
+    Route::post('/motoboy/cadastroMotoboy', 'createMotoboy')->name('create.motoboy'); # faz o cadastro do motoboy no banco
+
+    Route::get('/motoboy/alteracaoMotoboy/{id}','alteracaoMotoboy')->name('alteracao.motoboy'); # retorna view de formulario de alteração do motoboy
+    Route::post('/motoboy/alteracaoMotoboy/{id}','updateMotoboy')->name('update.motoboy'); # faz a alteração do motoboy no banco
+
+    Route::get('/motoboy/excluir/{id}','deleteMotoboy')->name('delete.motoboy'); # faz a exclusão do motoboy no banco
+});
+
+/** --------------------------------------------- */
+/**              Rotas Classe estado              */
+Route::middleware(['auth', 'tipo:operador'])->controller(EstadoController::class)->group(function(){
+    Route::get('/estado', 'readEstado')->name('readEstado'); # retorna todos os estados cadastrados e a página de listagem
+
+    Route::get('/estado/cadastroEstado', 'cadastroEstado')->name('cadastro.estado'); # retorna o formulario de cadastro de estado
+    Route::post('/estado/cadastroEstado', 'createEstado')->name('create.estado'); # faz o cadastro do estado no banco
+
+    Route::get('estado/alteracaoEstado/{id}', 'aleracaoEstado')->name('alteracao.estado'); # retorna view de formulario de alteração de estado
+    Route::post('estado/alteracaoEstado/{id}', 'updateEstado')->name('update.estado'); # faz a alteração do estado no banco
+
+    Route::get('estado/excluir/{id}', 'deleteEstado')->name('delete.estado'); # faz a exclusão do estado no banco
+
+});
 /*--------------------------------------------------- */
-/* Endpoints plano delivery */
-Route::controller(PlanoDeliveryController::class)->group(function() {
+/*               Endpoints plano delivery             */
+Route::middleware(['auth', 'tipo:operador'])->controller(PlanoDeliveryController::class)->group(function() {
     Route::get('/planoDelivery', 'show')->name('show.planoDelivery');
 
     Route::get('/planoDelivery/cadastrar', 'cadastrar')->name('cadastro.planoDelivery');
@@ -46,4 +89,80 @@ Route::controller(PlanoDeliveryController::class)->group(function() {
     Route::post('/planoDelivery/alterar/{id}', 'update')->name('update.planoDelivery');
 
     Route::get('/planoDelivery/excluir/{id}', 'excluir')->name('excluir.planoDelivery');
+});
+
+/*------------------------------------------------------- */
+/* Endpoints cliente plano delivery */
+Route::middleware(['auth', 'tipo:cliente,operador'])->controller(ClientePlanoDeliveryController::class)->group(function() {
+    Route::get('/cliente-planoDelivery', 'show')->name('show.cliente-planoDelivery');
+
+    Route::get('/cliente-planoDelivery/cadastrar', 'cadastrar')->name('cadastro.cliente-planoDelivery');
+    Route::post('/cliente-planoDelivery/cadastrar', 'create')->name('create.cliente-planoDelivery');
+
+    Route::get('/cliente-planoDelivery/alterar/{id}', 'alteracao')->name('alteracao.cliente-planoDelivery');
+    Route::post('/cliente-planoDelivery/alterar/{id}', 'update')->name('update.cliente-planoDelivery');
+
+    Route::get('/cliente-planoDelivery/excluir/{id}', 'excluir')->name('excluir.cliente-planoDelivery');
+});
+
+/*------------------------------------------------------- */
+/* Endpoints cidade */
+Route::middleware(['auth', 'tipo:operador'])->controller(CidadeController::class)->group(function(){
+    Route::get('/cidade', 'show')->name('show.cidade');
+
+    Route::get('/cidade/cadastrar', 'cadastrar')->name('cadastro.cidade');
+    Route::post('/cidade/cadastrar', 'create')->name('create.cidade');
+
+    Route::get('/cidade/alterar/{id}', 'alteracao')->name('alteracao.cidade');
+    Route::post('/cidade/alterar/{id}', 'update')->name('update.cidade');
+
+    Route::get('/cidade/excluir/{id}', 'excluir')->name('excluir.cidade');
+});
+
+/*------------------------------------------------------- */
+/* Endpoints Status */
+Route::middleware(['auth', 'tipo:operador'])->controller(StatusController::class)->group(function(){
+    Route::get('/status', 'readStatus')->name('readStatus');
+
+    Route::get('/status/cadastrar', 'cadastroStatus')->name('cadastro.status');
+    Route::post('/status/cadastrar', 'createStatus')->name('create.status');
+
+    Route::get('/status/alterar/{id}', 'aleracaoStatus')->name('alteracao.status');
+    Route::post('/status/alterar/{id}', 'updateStatus')->name('update.status');
+
+    Route::get('/status/excluir/{id}', 'deleteStatus')->name('delete.status');
+});
+
+/*------------------------------------------------------ */
+/* Endpoints Endereco */
+Route::middleware(['auth', 'tipo:operador'])->controller(EnderecoController::class)->group(function() {
+    Route::get('/endereco', 'show')->name('show.endereco');
+
+    Route::get('/endereco/cadastrar', 'cadastrar')->name('cadastro.endereco');
+    Route::post('/endereco/cadastrar', 'create')->name('create.endereco');
+
+    Route::get('/endereco/alterar/{id}', 'alteracao')->name('alteracao.endereco');
+    Route::post('/endereco/alterar/{id}', 'update')->name('update.endereco');
+
+    Route::get('/endereco/excluir/{id}', 'excluir')->name('excluir.endereco');
+});
+
+/** --------------------------------------------- */
+/**              Rotas Classe Entregas            */
+Route::middleware(['auth', 'tipo:cliente,operador'])->controller(EntregasController::class)->group(function() {
+    Route::get('/entrega', 'readEntrega')->name('readEntrega');
+
+    Route::get('/entrega/cadastrar', 'vinculaClienteEntrega')->name('cliente.entrega');
+    
+    Route::post('/entrega/cadastrar', 'cadastroEntrega')->name('cadastro.entrega');
+    Route::post('/entrega/cadastrar/create', 'createEntrega')->name('create.entrega');
+
+    Route::get('/entrega/alterar/{id}', 'aleracaoEntrega')->name('alteracao.entrega');
+    Route::post('/entrega/alterar/{id}', 'updateEntrega')->name('update.entrega');
+
+    Route::get('/entrega/excluir/{id}', 'deleteEntrega')->name('delete.entrega');
+
+    Route::get('/dashboard', 'showIndex')->name('show.index');
+    Route::post('/dashboard', 'alterEntregaByIndex')->name('entrega.index');
+
 });

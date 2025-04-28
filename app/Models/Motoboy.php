@@ -4,16 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Telefone;
 
-class PlanoDelivery extends Model
+class Motoboy extends Model
 {
     use HasFactory;
-
-    protected $table = 'plano_delivery';
-
     protected $fillable = [
-        'nome',
-        'descricao',
-        'valor_mensal'
+        "name",
+        "cpf",
     ];
+
+    public function telefone(){
+        return $this->hasMany(Telefone::class);
+    }
 }

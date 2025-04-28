@@ -1,6 +1,6 @@
 @extends('../template')
-@section('conteudo')
 
+@section('conteudo')
 <style>
     h1 {
         color: #1c2e4b;
@@ -73,35 +73,34 @@
 </style>
 
     <div class="card shadow p-4 mb-4 bg-white rounded">
-        <h1 class="mb-4 text-center" style="color: #1c2e4b;">Lista de Clientes</h1>
+        <h1 class="mb-4 text-center" style="color: #1c2e4b;">Cidades</h1>
 
         <table class="table table-hover table-bordered text-center align-middle" style="border-radius: 10px; overflow: hidden;">
             <thead class="table-dark">
                 <tr>
-                    <th style ="background: #1c2e4b;">ID</th>
-                    <th style ="background: #1c2e4b;">Nome</th>
-                    <th style ="background: #1c2e4b;">CNPJ</th>
+                    <th style ="background: #1c2e4b;">Nome Cidade</th>
+                    <th style ="background: #1c2e4b;">Cep</th>
+                    <th style ="background: #1c2e4b;">Estado</th>
                     <th style ="background: #1c2e4b;">Ações</th>
                 </tr>
             </thead>
             <tbody>
-            @foreach($clientes as $cliente)
-                    <tr>
-                        <td>{{ $cliente->id }}</td>
-                        <td>{{ $cliente->name }}</td>
-                        <td>{{ $cliente->cnpj }}</td>
-                        <td> 
-                            <a href="{{ route('alteracao.cliente', ['id' => $cliente->id]) }}" class="btn btn-outline-primary btn-sm me-2">
+            @foreach($cidades as $cidade)
+                <tr>
+                    <td>{{ $cidade->nome }}</td>
+                    <td>{{ $cidade->cep }}</td>
+                    <td>{{ $cidade->estado->name }}</td>
+                    <td>
+                            <a href="{{ route('alteracao.cidade', ['id' => $cidade->id]) }}" class="btn btn-outline-primary btn-sm me-2">
                                 <i class="bi bi-pencil-square"></i> Editar
                             </a>
-                            <a href="{{ route('delete.cliente', ['id' => $cliente->id])}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir?')">
+                            <a href="{{ route('excluir.cidade', ['id' => $cidade->id])}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir?')">
                                 <i class="bi bi-trash"></i> Excluir
                             </a>
-                        </td>
-                    </tr>
-                @endforeach
+                    </td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>
-
 @endsection

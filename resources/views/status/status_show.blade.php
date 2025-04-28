@@ -73,28 +73,28 @@
 </style>
 
     <div class="card shadow p-4 mb-4 bg-white rounded">
-        <h1 class="mb-4 text-center" style="color: #1c2e4b;">Lista de Clientes</h1>
+        <h1 class="mb-4 text-center" style="color: #1c2e4b;">Lista de Status</h1>
 
         <table class="table table-hover table-bordered text-center align-middle" style="border-radius: 10px; overflow: hidden;">
             <thead class="table-dark">
                 <tr>
                     <th style ="background: #1c2e4b;">ID</th>
                     <th style ="background: #1c2e4b;">Nome</th>
-                    <th style ="background: #1c2e4b;">CNPJ</th>
+                    <th style ="background: #1c2e4b;">Cor</th>
                     <th style ="background: #1c2e4b;">Ações</th>
                 </tr>
             </thead>
             <tbody>
-            @foreach($clientes as $cliente)
+            @foreach($status as $s)
                     <tr>
-                        <td>{{ $cliente->id }}</td>
-                        <td>{{ $cliente->name }}</td>
-                        <td>{{ $cliente->cnpj }}</td>
+                        <td>{{ $s->id }}</td>
+                        <td>{{ $s->nome }}</td>
+                        <td style = "background: {{$s->cor}}"></td>
                         <td> 
-                            <a href="{{ route('alteracao.cliente', ['id' => $cliente->id]) }}" class="btn btn-outline-primary btn-sm me-2">
+                            <a href="{{ route('alteracao.status', ['id' => $s->id]) }}" class="btn btn-outline-primary btn-sm me-2">
                                 <i class="bi bi-pencil-square"></i> Editar
                             </a>
-                            <a href="{{ route('delete.cliente', ['id' => $cliente->id])}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir?')">
+                            <a href="{{ route('delete.status', ['id' => $s->id])}}" class="btn btn-outline-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir?')">
                                 <i class="bi bi-trash"></i> Excluir
                             </a>
                         </td>

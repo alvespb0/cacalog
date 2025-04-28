@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use App\Models\Telefone;
+use App\Models\User;
 
-class clientesController extends Controller
+class ClientesController extends Controller
 {
     public function cadastroCliente(){
         return view('cliente/cliente_new');
@@ -19,20 +21,50 @@ class clientesController extends Controller
         $validatedData = $request->validate([
             "nome" => "required|string",
             "cnpj" => "required|string",
-            'email' => "required|string",
+            'email' => "required|email|string",
             'senha' => "required|string",
             "url_callback" => "nullable|string",
-            "token_autenticacao" => "nullable|string"
+            "telefone" => "required|array",
+            "telefone.*" => "required|string" 
         ]);
 
-        Cliente::create([
+        $user = User::create([
+            'name' => $validatedData['nome'],
+            'email' => $validatedData['email'],
+            'password' => $validatedData['senha'],
+            'tipo' => 'cliente'
+        ]);
+
+        $token = bin2hex(random_bytes(32));
+
+        $cliente = Cliente::create([
             'name' => $validatedData['nome'],
             'cnpj' => $validatedData['cnpj'],
-            'email' => $validatedData['email'],
-            'senha' => $validatedData['senha'],
             'url_callback' => $validatedData['url_callback'],
-            'token_autenticacao' => $validatedData['token_autenticacao']
+            'user_id' => $user->id,
+            'token_autenticacao' => $token
         ]);
+        
+
+        if (is_array($validatedData['telefone'])){
+            $telefones = $validatedData['telefone'];
+            foreach($telefones as $telefone){
+                Telefone::create([
+                    'telefone' => $telefone,
+                    'descricao' => 'Telefone do cliente: '. $cliente->name,
+                    'cliente_id' => $cliente->id,
+                    'motoboy_id' => null
+                ]);
+            }
+        }else{
+            $telefones = $validatedData['telefone'];
+            Telefone::create([
+                'telefone' => $telefones,
+                'descricao' => 'Telefone do cliente: '. $cliente->name,
+                'cliente_id' => $cliente->id,
+                'motoboy_id' => null
+            ]);
+        }
 
         session()->flash('mensagem', 'Cliente registrado com sucesso');
 
@@ -58,6 +90,7 @@ class clientesController extends Controller
         $cliente = Cliente::findOrFail($id);
         return view('cliente/cliente_edit', ['cliente'=> $cliente]);
     }
+
     /**
      * Recebe uma request faz a validação dos dados e faz o update dado o id
      * @param Request
@@ -68,22 +101,37 @@ class clientesController extends Controller
         $validatedData = $request->validate([
             "nome" => "required|string",
             "cnpj" => "required|string",
-            'email' => "required|string",
+            'email' => "required|email|string",
             'senha' => "required|string",
             "url_callback" => "nullable|string",
-            "token_autenticacao" => "nullable|string"
+            "telefone" => "required|array",
+            "telefone.*" => "required|string|min:1"    
         ]);
 
         $cliente = Cliente::findOrFail($id);
-        
+
+        $user = $cliente->user;
+
+        $user->update([
+            'name' => $validatedData['nome'],
+            'email' => $validatedData['email'],
+            'password' => $validatedData['senha'],
+        ]);
+
         $cliente->update([
             'name' => $validatedData['nome'],
             'cnpj' => $validatedData['cnpj'],
-            'email' => $validatedData['email'],
-            'senha' => $validatedData['senha'],
             'url_callback' => $validatedData['url_callback'],
-            'token_autenticacao' => $validatedData['token_autenticacao']
         ]);
+
+        $cliente->telefone()->delete(); # deleta os telefones antigos para incluir novamente.
+
+        foreach ($validatedData['telefone'] as $tel) {
+            $cliente->telefone()->create([
+                'telefone' => $tel,
+                'descricao' => 'Telefone do cliente: '. $cliente->name,
+            ]);
+        }
 
         session()->flash('mensagem', 'Cliente atualizado com sucesso');
 
