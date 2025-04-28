@@ -40,6 +40,7 @@
                         Conteudo: {{ $entrega->conteudo_entrega }} <br>
                         Motoboy: {{ $entrega->motoboy->name }}
                     </p>
+                    
                     Status da Entrega:
                     <div class="d-flex align-items-center mb-3">
                         <div id="status-circle-{{ $entrega->id }}" 
@@ -58,11 +59,13 @@
                         </select>
                     </div>
 
+                    @if(Auth::check() && Auth::user()->tipo === 'operador')
                     <input type="hidden" name="entrega_id" value="{{ $entrega->id }}">
 
                     <button class="btn btn-primary salvar-btn" 
                             data-entrega-id="{{ $entrega->id }}" 
                             disabled>Salvar</button>
+                    @endif
                 </div>
             </div>
         </div>
