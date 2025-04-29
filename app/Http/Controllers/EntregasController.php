@@ -137,6 +137,7 @@ class EntregasController extends Controller
         $status = Status::all();
         return view('index', ['entregas'=>$entregas, 'status'=>$status]);
     }
+
     public function alterEntregaByIndex(Request $request)
     {
         $request->validate([

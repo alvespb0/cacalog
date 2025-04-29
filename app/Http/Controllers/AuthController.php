@@ -27,7 +27,7 @@ class AuthController extends Controller
         ];
 
         if (Auth::attempt($credenciais)) {
-            return redirect(route('readCliente'));
+            return redirect(route('show.index'));
         }
     
         session()->flash('mensagem', 'Credenciais inválidas');

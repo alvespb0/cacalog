@@ -54,7 +54,7 @@
         <input type="text" class="form-control" name="nome" required>
     </div>
     <div class="form-group">
-        <label for="NameFornecedor">CNPJ</label>
+        <label for="NameFornecedor">CPF</label>
         <input type="number" class="form-control" name="cnpj" required>
     </div>
     <div class="form-group">
