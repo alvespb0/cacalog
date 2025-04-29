@@ -46,6 +46,7 @@
                         <div id="status-circle-{{ $entrega->id }}" 
                             style="width: 15px; height: 15px; border-radius: 50%; background-color: {{ $entrega->status_cor }}; margin-right: 10px;">
                         </div>
+                        @if(Auth::check() && Auth::user()->tipo === 'operador')
                         <select class="form-select status-select" 
                                 data-entrega-id="{{ $entrega->id }}" 
                                 style="width: 200px;" name="status">
@@ -57,6 +58,11 @@
                                 </option>
                             @endforeach
                         </select>
+                        @endif
+                        @if(Auth::check() && Auth::user()->tipo === 'cliente')
+                        <p><div style="width: 10px; height: 10px; border-radius: 50%; background-color: {{$entrega->status->cor}};"></div>
+                            {{$entrega->status->nome}}</p> 
+                        @endif
                     </div>
 
                     @if(Auth::check() && Auth::user()->tipo === 'operador')
