@@ -35,11 +35,11 @@
                 <div class="card-body">
                     <h5 class="card-title">Codigo Pedido: {{ $entrega->codigo_pedido }}</h5>
                     <p class="card-text">
-                        Cliente: {{ $entrega->endereco->cliente->name }} <br>
-                        Endereço: {{ $entrega->endereco->logradouro }}<br>
+                        Cliente: {{ $entrega->cliente }} <br>
+                        Endereço: {{ $entrega->endereco }}<br>
                         Conteudo: {{ $entrega->conteudo_entrega }} <br>
-                        Motoboy: {{ $entrega->motoboy->name }}
-                    </p>
+                        Motoboy: {{ $entrega->motoboy ? $entrega->motoboy->name : 'Não foi definido motoboy' }}
+                        </p>
                     
                     Status da Entrega:
                     <div class="d-flex align-items-center mb-3">
