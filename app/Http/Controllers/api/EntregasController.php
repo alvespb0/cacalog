@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreEntregaRequest;
 
 use App\Models\Entrega;
+use App\Models\Cliente;
 
 class EntregasController extends Controller
 {
@@ -18,21 +19,27 @@ class EntregasController extends Controller
         return Entrega::all();
     }
 
+    public function resgataCliente($token){
+        return Cliente::where('token_autenticacao', $token)->first();
+    }
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreEntregaRequest $request)
     {
         $request->validated();
-
-        $codigoPedido = rand(1000, 9999);
+        
+        $token = $request->header('Authorization');
+        $cliente = $this->resgataCliente($token);
 
         $entrega = new Entrega;
-        $entrega->codigo_pedido = $codigoPedido;
+        $entrega->codigo_pedido = $request->codigo_pedido;
         $entrega->cliente = $request->cliente;
         $entrega->cep = $request->cep;
         $entrega->conteudo_entrega = $request->conteudo_entrega;
-        $entrega->endereco = $request->endereco;
+        $entrega->rua = $request->rua;
+        $entrega->bairro = $request->bairro;
+        $entrega->cliente_id = $cliente->id;
 
         $entrega->save();
 

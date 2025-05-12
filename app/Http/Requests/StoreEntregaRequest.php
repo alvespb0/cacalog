@@ -22,11 +22,13 @@ class StoreEntregaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            #'cliente_id' => 'required|integer|exists:clientes,id', /* O certo para mim seria fazer a STORE com cliente_id, mas foi alterado para facilitar o processo e colocado cliente como string */
+            /* 'cliente_id' => 'required|integer|exists:clientes,id', */ /* O certo para mim seria fazer a STORE com cliente_id, mas foi alterado para facilitar o processo e colocado cliente como string */
             'cliente' => 'required|string',
+            'codigo_pedido' => 'required|string',
             'cep' => 'required|string',
             'conteudo_entrega' => 'required|string',
-            'endereco' => 'required|string',
+            'rua' => 'required|string',
+            'bairro' => 'required|string',
         ];
     }
 
