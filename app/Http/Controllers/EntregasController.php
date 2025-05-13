@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 use App\Models\Entrega;
 use App\Models\Endereco;
@@ -152,6 +153,38 @@ class EntregasController extends Controller
         ]);
     
         return response()->json(['mensagem' => 'Status atualizado com sucesso!']);
+    }
+
+    public function vinculaMotoboy(Request $request){
+        $entregas = $request->entregas;
+        #dd($entregas);
+        $req = [
+            'cep' => '',
+            'rua' => '',
+            'bairro' => '',
+        ];
+        
+        $mensagem = [];
+        foreach ($entregas as $entrega => $value) {
+            /* $mensagem[] .= "{";
+            $mensagem[] .= '"cep:"';
+            $mensagem[] .= "{$entrega['cep']}"; 
+            $mensagem[] .= '"rua:"';
+            $mensagem[] .= "{$entrega['rua']}"; 
+            $mensagem[] .= '"bairro:"';
+            $mensagem[] .= "{$entrega['bairro']}";
+            $mensagem[] .= "}"; */ 
+            $mensagem[] = $value;
+        }
+
+        $numMotoboys = Motoboy::count();
+
+        $response = Http::post("https://api-alocacao-entrega-fastapi-h0yt.onrender.com/otimiza/{$numMotoboys}",
+            $mensagem
+        );
+
+        #dd($response);
+        return $response;
     }
     
 }

@@ -28,11 +28,9 @@
 </style>
 
 <div class="container py-5">
-    @php 
-    var_dump(Auth::user()->cliente);
-    @endphp
     <div class="row">
         @foreach($entregas as $entrega)
+        @if(Auth::check() && (Auth::user()->tipo == 'operador' || Auth::user()->cliente->id == $entrega->cliente_id))
         <div class="col-md-6 mb-4">
             <div class="card shadow-sm">
                 <div class="card-body">
@@ -74,11 +72,25 @@
                     <button class="btn btn-primary salvar-btn" 
                             data-entrega-id="{{ $entrega->id }}" 
                             disabled>Salvar</button>
+
                     @endif
                 </div>
             </div>
         </div>
+        @endif
         @endforeach
+        <form action="{{route('vincular.entregas')}}" method="POST">
+        @csrf
+        @foreach($entregas as $entrega)
+            <input type="hidden" name="entregas[{{$entrega->id}}][id]" value="{{ $entrega->id }}">
+            <input type="hidden" name="entregas[{{$entrega->id}}][cep]" value="{{ $entrega->cep }}">
+            <input type="hidden" name="entregas[{{$entrega->id}}][rua]" value="{{ $entrega->rua }}">
+            <input type="hidden" name="entregas[{{$entrega->id}}][bairro]" value="{{ $entrega->bairro }}">
+        @endforeach
+        <button class="col-sm-12 btn btn-primary">
+            teste
+        </button>
+        </form>
     </div>
 </div>
 
