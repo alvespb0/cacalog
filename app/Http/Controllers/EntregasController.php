@@ -158,22 +158,9 @@ class EntregasController extends Controller
     public function vinculaMotoboy(Request $request){
         $entregas = $request->entregas;
         #dd($entregas);
-        $req = [
-            'cep' => '',
-            'rua' => '',
-            'bairro' => '',
-        ];
         
         $mensagem = [];
         foreach ($entregas as $entrega => $value) {
-            /* $mensagem[] .= "{";
-            $mensagem[] .= '"cep:"';
-            $mensagem[] .= "{$entrega['cep']}"; 
-            $mensagem[] .= '"rua:"';
-            $mensagem[] .= "{$entrega['rua']}"; 
-            $mensagem[] .= '"bairro:"';
-            $mensagem[] .= "{$entrega['bairro']}";
-            $mensagem[] .= "}"; */ 
             $mensagem[] = $value;
         }
 
