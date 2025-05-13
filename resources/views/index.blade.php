@@ -28,6 +28,9 @@
 </style>
 
 <div class="container py-5">
+    @php 
+    var_dump(Auth::user()->cliente);
+    @endphp
     <div class="row">
         @foreach($entregas as $entrega)
         <div class="col-md-6 mb-4">
@@ -60,8 +63,8 @@
                         </select>
                         @endif
                         @if(Auth::check() && Auth::user()->tipo === 'cliente')
-                        <p><div style="width: 10px; height: 10px; border-radius: 50%; background-color: {{$entrega->status->cor}};"></div>
-                            {{$entrega->status->nome}}</p> 
+                        <p><div style="width: 10px; height: 10px; border-radius: 50%; background-color: {{$entrega->status ? $entrega->status->cor : 'gray'}};"></div>
+                            &nbsp{{$entrega->status ? $entrega->status->nome : 'Nenhum status Vinculado'}}</p> 
                         @endif
                     </div>
 
