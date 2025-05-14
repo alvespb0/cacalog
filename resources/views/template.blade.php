@@ -134,22 +134,6 @@
                         </ul>
                     </li>
 
-                    <!-- Dropdown Features -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="featuresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Estado
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="featuresDropdown">
-                            <li><a class="dropdown-item" href="/estado/cadastroEstado">Cadastro Estado</a></li>
-                            <li><a class="dropdown-item" href="/estado">Lista de Estados</a></li>
-                        </ul>
-                        <ul class="dropdown-menu" aria-labelledby="featuresDropdown">
-                            <li><a class="dropdown-item" href="/cidade/cadastrar">Cadastro Cidade</a></li>
-                            <li><a class="dropdown-item" href="/cidade">Lista de cidades</a></li>
-                        </ul>
-
-                    </li>
-
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="featuresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Cidade
@@ -157,18 +141,6 @@
                         <ul class="dropdown-menu" aria-labelledby="featuresDropdown">
                             <li><a class="dropdown-item" href="/cidade/cadastrar">Cadastro Cidade</a></li>
                             <li><a class="dropdown-item" href="/cidade">Lista de cidades</a></li>
-                        </ul>
-
-                    </li>
-
-                    
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="featuresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Endereço
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="featuresDropdown">
-                            <li><a class="dropdown-item" href="/endereco/cadastrar">Cadastro Endereço</a></li>
-                            <li><a class="dropdown-item" href="/endereco">Lista de Endereço</a></li>
                         </ul>
 
                     </li>
@@ -211,6 +183,15 @@
                         <ul class="dropdown-menu" aria-labelledby="pricingDropdown">
                             <li><a class="dropdown-item" href="/entrega/cadastrar">Cadastrar Entrega</a></li>
                             <li><a class="dropdown-item" href="/entrega">Minhas Entregas</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="# id="pricingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Gráfico
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="pricingDropdown">
+                            <li><a class="dropdown-item" href="/dashboard-grafico">Gráficos</a></li>
                         </ul>
                     </li>
                     @endif

@@ -25,7 +25,7 @@ class Entrega extends Model
         return $this->belongsTo(Status::class);
     }
     public function motoboy(){
-        return $this->belongsTo(Motoboy::class);
+        return $this->belongsTo(Motoboy::class, 'motoboy_id');
     }
     public function endereco(){
         return $this->belongsTo(Endereco::class);

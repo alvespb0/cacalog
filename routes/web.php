@@ -11,6 +11,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\EnderecoController;
 use App\Http\Controllers\EntregasController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -164,6 +165,12 @@ Route::middleware(['auth', 'tipo:cliente,operador'])->controller(EntregasControl
 
     Route::get('/dashboard', 'showIndex')->name('show.index');
     Route::post('/dashboard', 'alterEntregaByIndex')->name('entrega.index');
-
+  
     Route::post('/dashboard/vincular-entregas', 'vinculaMotoboy')->name('vincular.entregas');
+});
+
+/** --------------------------------------------- */
+/**              Rotas Classe Dashboard           */
+Route::middleware(['auth', 'tipo:cliente,operador'])->controller(DashboardController::class)->group(function() {
+    Route::get('/dashboard-grafico', 'dashboard')->name('dashboard-grafico');
 });
