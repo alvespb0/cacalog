@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 use App\Models\Entrega;
 use App\Models\Endereco;
@@ -133,7 +134,8 @@ class EntregasController extends Controller
     }
 
     public function showIndex(){
-        $entregas = Entrega::all();
+        $entregas = Entrega::where('status_id',1)
+                            ->orWhere('status_id',2)->get();
         $status = Status::all();
         return view('index', ['entregas'=>$entregas, 'status'=>$status]);
     }
@@ -150,8 +152,40 @@ class EntregasController extends Controller
         $entrega->update([
             'status_id' => $request->status
         ]);
-    
+
+        #$callback = Http::post($entrega->clienteObject->url_callback);
+
         return response()->json(['mensagem' => 'Status atualizado com sucesso!']);
+    }
+
+    public function vinculaMotoboy(Request $request){
+        $entregas = $request->entregas;
+        #dd($entregas);
+        
+        $mensagem = [];
+        foreach ($entregas as $entrega => $value) {
+            $mensagem[] = $value;
+        }
+
+        $numMotoboys = Motoboy::count();
+
+        $response = Http::post("https://api-alocacao-entrega-fastapi-h0yt.onrender.com/otimiza/{$numMotoboys}",
+            $mensagem
+        );
+
+        $responseArray = json_decode($response);
+        foreach($responseArray as $response){
+            $entrega = Entrega::where('cep', $response->cep)
+                                ->where('rua',$response->rua)
+                                ->where('bairro', $response->bairro)
+                                ->first();
+            $entrega->update([
+                'motoboy_id' => $response->motoboy + 1,
+                'status_id' => 1
+            ]);
+            #$callback = Http::post($entrega->clienteObject->url_callback);
+        }
+        return redirect(route('show.index'));
     }
     
 }

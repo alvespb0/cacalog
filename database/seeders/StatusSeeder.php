@@ -20,6 +20,11 @@ class StatusSeeder extends Seeder
         ]);
 
         DB::table('status')->insert([
+            'nome' => 'Em locomoção',
+            'cor' => '#ccc121'
+        ]);
+
+        DB::table('status')->insert([
             'nome' => 'entregue',
             'cor' => '#009000'
         ]);
