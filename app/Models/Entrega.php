@@ -30,4 +30,8 @@ class Entrega extends Model
     public function endereco(){
         return $this->belongsTo(Endereco::class);
     }
+    
+    public function clienteObject(){
+        return $this->belongsTo(Cliente::class, 'cliente_id');
+    }
 }
