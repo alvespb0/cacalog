@@ -30,16 +30,17 @@
 <div class="container py-5">
     <div class="row">
         @foreach($entregas as $entrega)
+        @if(Auth::check() && (Auth::user()->tipo == 'operador' || Auth::user()->cliente->id == $entrega->cliente_id))
         <div class="col-md-6 mb-4">
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title">Codigo Pedido: {{ $entrega->codigo_pedido }}</h5>
                     <p class="card-text">
-                        Cliente: {{ $entrega->endereco->cliente->name }} <br>
-                        Endereço: {{ $entrega->endereco->logradouro }}<br>
+                        Cliente: {{ $entrega->cliente }} <br>
+                        Endereço: {{ $entrega->endereco }}<br>
                         Conteudo: {{ $entrega->conteudo_entrega }} <br>
-                        Motoboy: {{ $entrega->motoboy->name }}
-                    </p>
+                        Motoboy: {{ $entrega->motoboy ? $entrega->motoboy->name : 'Não foi definido motoboy' }}
+                        </p>
                     
                     Status da Entrega:
                     <div class="d-flex align-items-center mb-3">
@@ -60,8 +61,8 @@
                         </select>
                         @endif
                         @if(Auth::check() && Auth::user()->tipo === 'cliente')
-                        <p><div style="width: 10px; height: 10px; border-radius: 50%; background-color: {{$entrega->status->cor}};"></div>
-                            {{$entrega->status->nome}}</p> 
+                        <p><div style="width: 10px; height: 10px; border-radius: 50%; background-color: {{$entrega->status ? $entrega->status->cor : 'gray'}};"></div>
+                            &nbsp{{$entrega->status ? $entrega->status->nome : 'Nenhum status Vinculado'}}</p> 
                         @endif
                     </div>
 
@@ -71,11 +72,25 @@
                     <button class="btn btn-primary salvar-btn" 
                             data-entrega-id="{{ $entrega->id }}" 
                             disabled>Salvar</button>
+
                     @endif
                 </div>
             </div>
         </div>
+        @endif
         @endforeach
+        <form action="{{route('vincular.entregas')}}" method="POST">
+        @csrf
+        @foreach($entregas as $entrega)
+            <input type="hidden" name="entregas[{{$entrega->id}}][id]" value="{{ $entrega->id }}">
+            <input type="hidden" name="entregas[{{$entrega->id}}][cep]" value="{{ $entrega->cep }}">
+            <input type="hidden" name="entregas[{{$entrega->id}}][rua]" value="{{ $entrega->rua }}">
+            <input type="hidden" name="entregas[{{$entrega->id}}][bairro]" value="{{ $entrega->bairro }}">
+        @endforeach
+        <button class="col-sm-12 btn btn-primary">
+            teste
+        </button>
+        </form>
     </div>
 </div>
 

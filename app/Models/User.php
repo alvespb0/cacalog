@@ -14,7 +14,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     public function cliente(){
-    return $this->hasOne(Cliente::class);
+        return $this->hasOne(Cliente::class);
     }
 
 
