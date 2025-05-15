@@ -28,6 +28,14 @@
 </style>
 
 <div class="container py-5">
+    @if(Auth::check() && Auth::user()->tipo == 'cliente')
+    <h6>Token API: 
+        <span id="token" class="d-none">{{ Auth::user()->cliente->token_autenticacao }}</span>
+        <button class="btn btn-sm btn-outline-primary ms-2" onclick="document.getElementById('token').classList.toggle('d-none')">
+            Show Token
+        </button>
+    </h6>
+        @endif
     <div class="row">
         @foreach($entregas as $entrega)
         @if(Auth::check() && (Auth::user()->tipo == 'operador' || Auth::user()->cliente->id == $entrega->cliente_id))
